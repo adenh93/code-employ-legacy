@@ -8,16 +8,19 @@ import {
   JobListingSearchResponse,
   JobListingSearchFilter
 } from "../../../common/types";
+import Spinner from "../../UI/Spinner";
 
 interface Props {
   jobListings: JobListingSearchResponse;
   filter: JobListingSearchFilter;
+  apiCallsInProgress: number;
   loadJobListings: (filter: JobListingSearchFilter) => Promise<void>;
 }
 
 const JobsListContainer: React.SFC<Props> = ({
   jobListings,
   filter,
+  apiCallsInProgress,
   loadJobListings
 }) => {
   React.useEffect(() => {
@@ -25,13 +28,18 @@ const JobsListContainer: React.SFC<Props> = ({
       console.log(error);
     });
   }, [filter]);
-  return <JobsList jobListings={jobListings} />;
+  return apiCallsInProgress > 0 ? (
+    <Spinner size={100} />
+  ) : (
+    <JobsList jobListings={jobListings} />
+  );
 };
 
 const mapStateToProps = (state: ApplicationState) => {
   return {
     jobListings: state.jobListings.jobListings,
-    filter: state.jobListingsFilter.jobListingsFilter
+    filter: state.jobListingsFilter.jobListingsFilter,
+    apiCallsInProgress: state.apiStatus.apiCallsInProgress
   };
 };
 const mapDispatchtoProps = (dispatch: Dispatch) => {

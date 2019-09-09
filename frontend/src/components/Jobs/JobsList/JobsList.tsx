@@ -11,18 +11,26 @@ const JobsList: React.SFC<Props> = ({ jobListings }) => {
   const { recordCount, items } = jobListings;
   return (
     <>
-      <Typography>
-        Showing {items.length} of {recordCount}
-      </Typography>
-      <Grid container spacing={3}>
-        {items.map(job => {
-          return (
-            <Grid key={job.id} item xs={12}>
-              <JobsListItem jobListing={job} />
-            </Grid>
-          );
-        })}
-      </Grid>
+      {items.length ? (
+        <>
+          <Typography>
+            Showing {items.length} of {recordCount}
+          </Typography>
+          <Grid container spacing={3}>
+            {items.map(job => {
+              return (
+                <Grid key={job.id} item xs={12}>
+                  <JobsListItem jobListing={job} />
+                </Grid>
+              );
+            })}
+          </Grid>
+        </>
+      ) : (
+        <Typography>
+          No job listings found with your filter criteria.
+        </Typography>
+      )}
     </>
   );
 };
