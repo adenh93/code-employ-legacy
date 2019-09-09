@@ -13,7 +13,7 @@ const JobsList: React.SFC<Props> = ({ jobListings }) => {
     <>
       {items.length ? (
         <>
-          <Typography>
+          <Typography variant="body1">
             Showing {items.length} of {recordCount}
           </Typography>
           <Grid container spacing={3}>
@@ -27,7 +27,7 @@ const JobsList: React.SFC<Props> = ({ jobListings }) => {
           </Grid>
         </>
       ) : (
-        <Typography>
+        <Typography variant="body1">
           No job listings found with your filter criteria.
         </Typography>
       )}

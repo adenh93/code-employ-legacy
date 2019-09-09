@@ -1,12 +1,15 @@
 import * as React from "react";
-import { TextField } from "@material-ui/core";
+import { TextField, InputAdornment } from "@material-ui/core";
 
 interface Props {
   name: string;
-  value: string;
+  value: any;
   type?: string;
   label?: string;
   placeholder?: string;
+  adornment?: any;
+  py?: number;
+  px?: number;
   onChange?: (e: any) => void;
 }
 
@@ -16,14 +19,24 @@ const TextInput: React.SFC<Props> = ({
   label,
   value,
   placeholder,
+  adornment,
   onChange
 }) => (
   <TextField
     name={name}
     type={type}
     label={label}
-    value={value}
+    value={value || ""}
     placeholder={placeholder}
+    InputProps={
+      adornment
+        ? {
+            startAdornment: (
+              <InputAdornment position="start">{adornment}</InputAdornment>
+            )
+          }
+        : undefined
+    }
     onChange={onChange}
   />
 );
