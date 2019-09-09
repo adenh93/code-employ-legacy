@@ -57,7 +57,7 @@ class JobListingSelector():
                 filter.data['position_type']))
         if 'salary_min' in filter.data:
             query &= Q(salary__gte=filter.data['salary_min'])
-        if 'salary_max' in filter.data:
+        if 'salary_max' in filter.data and filter.data['salary_max'] > 0:
             query &= Q(salary__lte=filter.data['salary_max'])
         if 'languages' in filter.data:
             query &= Q(languages__contained_by=filter.data['languages'])
