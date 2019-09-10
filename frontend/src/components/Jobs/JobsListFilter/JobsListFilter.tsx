@@ -2,7 +2,7 @@ import * as React from "react";
 import { JobListingSearchFilter } from "../../../common/types";
 import { Typography, Button, FormControl, Grid } from "@material-ui/core";
 import TextInput from "../../UI/TextInput";
-import Select from "../../UI/Select";
+import CurrencySelect from "../../UI/CurrencySelect";
 import EnumSelect from "../../UI/EnumSelect";
 import Paper from "../../UI/Paper";
 import { yearlyWages } from "../../../common/constants";
@@ -62,28 +62,24 @@ const JobsListFilter: React.SFC<Props> = ({
         </Grid>
         <Grid item xs={12} sm={4} md={12} lg={6}>
           <FormControl fullWidth={true}>
-            <Select
+            <CurrencySelect
               name="salaryMin"
               label="Minimum Salary"
               value={jobListingsFilter.salaryMin}
               items={yearlyWages}
-              defaultLabel="Any"
-              defaultValue={0}
-              adornment="$"
+              emptyText="Any"
               onChange={onUpdateFilter}
             />
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={4} md={12} lg={6}>
           <FormControl fullWidth={true}>
-            <Select
+            <CurrencySelect
               name="salaryMax"
               label="Maximum Salary"
               value={jobListingsFilter.salaryMax}
               items={yearlyWages}
-              defaultLabel="Any"
-              defaultValue={0}
-              adornment="$"
+              emptyText="Any"
               onChange={onUpdateFilter}
             />
           </FormControl>

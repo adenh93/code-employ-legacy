@@ -5,7 +5,6 @@ import {
   CLEAR_JOB_LISTINGS_FILTER
 } from "./types";
 import { JobListingSearchFilter } from "../../common/types";
-import { JobPositionType, SalaryFrequencyType } from "../../common/enums";
 
 const initialState: JobListingsFilterState = {
   jobListingsFilter: {
@@ -15,7 +14,9 @@ const initialState: JobListingsFilterState = {
     orderDirection: false,
     keyword: "",
     positionType: 0,
-    salaryFrequency: 0
+    salaryFrequency: 0,
+    salaryMin: 0,
+    salaryMax: 0
   } as JobListingSearchFilter
 };
 
