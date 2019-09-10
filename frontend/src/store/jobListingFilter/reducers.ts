@@ -5,6 +5,7 @@ import {
   CLEAR_JOB_LISTINGS_FILTER
 } from "./types";
 import { JobListingSearchFilter } from "../../common/types";
+import { JobPositionType } from "../../common/enums";
 
 const initialState: JobListingsFilterState = {
   jobListingsFilter: {
@@ -12,7 +13,8 @@ const initialState: JobListingsFilterState = {
     itemsPerPage: 5,
     orderByColumn: "created_date",
     orderDirection: false,
-    keyword: ""
+    keyword: "",
+    positionType: JobPositionType.FULLTIME
   } as JobListingSearchFilter
 };
 

@@ -1,10 +1,5 @@
 import * as React from "react";
-import {
-  Select as MSelect,
-  MenuItem,
-  InputLabel,
-  FormControl
-} from "@material-ui/core";
+import { Select as MSelect, MenuItem, InputLabel } from "@material-ui/core";
 
 interface Props {
   name: string;

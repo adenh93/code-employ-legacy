@@ -3,8 +3,10 @@ import { JobListingSearchFilter } from "../../../common/types";
 import { Typography, Button, FormControl, Grid } from "@material-ui/core";
 import TextInput from "../../UI/TextInput";
 import Select from "../../UI/Select";
+import EnumSelect from "../../UI/EnumSelect";
 import Paper from "../../UI/Paper";
 import { yearlyWages } from "../../../common/constants";
+import { JobPositionType } from "../../../common/enums";
 
 interface Props {
   jobListingsFilter: JobListingSearchFilter;
@@ -30,6 +32,17 @@ const JobsListFilter: React.SFC<Props> = ({
               label="Keyword"
               value={jobListingsFilter.keyword}
               placeholder="Enter a keyword..."
+              onChange={onUpdateFilter}
+            />
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={4} md={12} lg={12}>
+          <FormControl fullWidth={true}>
+            <EnumSelect
+              name="positionType"
+              label="Position Type"
+              value={jobListingsFilter.positionType}
+              enumType={JobPositionType}
               onChange={onUpdateFilter}
             />
           </FormControl>
