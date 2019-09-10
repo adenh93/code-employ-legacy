@@ -7,6 +7,7 @@ interface Props {
   label: string;
   enumType: any;
   value: any;
+  emptyText?: string;
   readOnly?: boolean;
   onChange: (e: any) => void;
 }
@@ -17,6 +18,7 @@ const EnumSelect: React.SFC<Props> = ({
   enumType,
   value,
   readOnly,
+  emptyText = "Select a value...",
   onChange
 }) => (
   <>
@@ -26,6 +28,7 @@ const EnumSelect: React.SFC<Props> = ({
       onChange={onChange}
       inputProps={{ name: name, id: name, readOnly: readOnly }}
     >
+      <MenuItem value={0}>{emptyText}</MenuItem>
       {GetEnumList(enumType).map((item, key) => (
         <MenuItem key={key} value={item}>
           {EnumLabelDictionary.get(enumType, item)}

@@ -14,8 +14,8 @@ const initialState: JobListingsFilterState = {
     orderByColumn: "created_date",
     orderDirection: false,
     keyword: "",
-    positionType: JobPositionType.FULLTIME,
-    salaryFrequency: SalaryFrequencyType.PERYEAR
+    positionType: 0,
+    salaryFrequency: 0
   } as JobListingSearchFilter
 };
 

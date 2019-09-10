@@ -43,6 +43,7 @@ const JobsListFilter: React.SFC<Props> = ({
               label="Position Type"
               value={jobListingsFilter.positionType}
               enumType={JobPositionType}
+              emptyText="Any"
               onChange={onUpdateFilter}
             />
           </FormControl>
@@ -54,6 +55,7 @@ const JobsListFilter: React.SFC<Props> = ({
               label="Salary Frequency"
               value={jobListingsFilter.salaryFrequency}
               enumType={SalaryFrequencyType}
+              emptyText="Any"
               onChange={onUpdateFilter}
             />
           </FormControl>

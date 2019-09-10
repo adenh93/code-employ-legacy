@@ -52,10 +52,10 @@ class JobListingSelector():
                 Q(job_title__contains=filter.data['keyword']) |
                 Q(description__contains=filter.data['keyword'])
             )
-        if 'position_type' in filter.data:
+        if 'position_type' in filter.data and filter.data['position_type'] > 0:
             query &= Q(position_type=JobPositionType(
                 filter.data['position_type']))
-        if 'salary_frequency' in filter.data:
+        if 'salary_frequency' in filter.data and filter.data['salary_frequency'] > 0:
             query &= Q(salary_frequency=SalaryFrequency(
                 filter.data['salary_frequency']
             ))
