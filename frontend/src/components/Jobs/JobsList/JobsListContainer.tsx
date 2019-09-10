@@ -9,6 +9,7 @@ import {
   JobListingSearchFilter
 } from "../../../common/types";
 import Spinner from "../../UI/Spinner";
+import { toast } from "react-toastify";
 
 interface Props {
   jobListings: JobListingSearchResponse;
@@ -25,7 +26,7 @@ const JobsListContainer: React.SFC<Props> = ({
 }) => {
   React.useEffect(() => {
     loadJobListings(filter).catch(error => {
-      console.log(error);
+      toast.error("Failed to load job listings!");
     });
   }, [filter]);
   return apiCallsInProgress > 0 ? (
