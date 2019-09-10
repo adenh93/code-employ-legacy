@@ -1,5 +1,5 @@
 import * as React from "react";
-import { HashRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "../components/UI/Header";
 import HomePage from "./Home/HomePage";
 import JobsList from "./Jobs/JobsListPage";
@@ -14,11 +14,13 @@ const navItems: NavBarItem[] = [
 const App = () => (
   <Router>
     <Header title="CodeEmploy" navItems={navItems} />
-    <Grid container style={{ padding: 24 }}>
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/Jobs" component={JobsList} />
-      </Switch>
+    <Grid container style={{ padding: 20 }}>
+      <Grid item xs={12}>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/Jobs" component={JobsList} />
+        </Switch>
+      </Grid>
     </Grid>
   </Router>
 );

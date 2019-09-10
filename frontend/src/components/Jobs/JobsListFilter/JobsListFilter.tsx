@@ -1,8 +1,9 @@
 import * as React from "react";
 import { JobListingSearchFilter } from "../../../common/types";
-import { Paper, Typography, Box, Button, FormControl } from "@material-ui/core";
+import { Typography, Button, FormControl, Grid } from "@material-ui/core";
 import TextInput from "../../UI/TextInput";
 import Select from "../../UI/Select";
+import Paper from "../../UI/Paper";
 import { yearlyWages } from "../../../common/constants";
 
 interface Props {
@@ -17,10 +18,12 @@ const JobsListFilter: React.SFC<Props> = ({
   onClearFilter
 }) => {
   return (
-    <Paper>
-      <Box p={3}>
-        <Typography variant="h5">Filter</Typography>
-        <Box py={2}>
+    <Paper p={3}>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Typography variant="h5">Filter</Typography>
+        </Grid>
+        <Grid item xs={12} sm={4} md={12}>
           <FormControl fullWidth={true}>
             <TextInput
               name="keyword"
@@ -30,8 +33,8 @@ const JobsListFilter: React.SFC<Props> = ({
               onChange={onUpdateFilter}
             />
           </FormControl>
-        </Box>
-        <Box py={2}>
+        </Grid>
+        <Grid item xs={12} sm={4} md={12} lg={6}>
           <FormControl fullWidth={true}>
             <Select
               name="salaryMin"
@@ -44,8 +47,8 @@ const JobsListFilter: React.SFC<Props> = ({
               onChange={onUpdateFilter}
             />
           </FormControl>
-        </Box>
-        <Box py={2}>
+        </Grid>
+        <Grid item xs={12} sm={4} md={12} lg={6}>
           <FormControl fullWidth={true}>
             <Select
               name="salaryMax"
@@ -58,11 +61,13 @@ const JobsListFilter: React.SFC<Props> = ({
               onChange={onUpdateFilter}
             />
           </FormControl>
-        </Box>
-        <Button variant="contained" onClick={onClearFilter}>
-          Clear
-        </Button>
-      </Box>
+        </Grid>
+        <Grid item xs={12}>
+          <Button variant="contained" onClick={onClearFilter}>
+            Clear
+          </Button>
+        </Grid>
+      </Grid>
     </Paper>
   );
 };

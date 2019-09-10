@@ -9,7 +9,7 @@ import { JobListingSearchFilter } from "../../common/types";
 const initialState: JobListingsFilterState = {
   jobListingsFilter: {
     currentPage: 1,
-    itemsPerPage: 15,
+    itemsPerPage: 5,
     orderByColumn: "created_date",
     orderDirection: false,
     keyword: ""
