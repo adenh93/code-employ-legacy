@@ -10,14 +10,6 @@ class JobListingState(EnumIntegerField):
     CLOSED = 5
     ARCHIVED = 6
 
-    class Labels:
-        DRAFT = 'Draft'
-        PREPUBLISH = 'Queued for publish'
-        PUBLISHED = 'Published'
-        EXPIRED = 'Expired'
-        CLOSED = 'Closed'
-        ARCHIVED = 'Archived'
-
 
 class JobPositionType(ChoiceEnum):
     CASUAL = 'Casual'
