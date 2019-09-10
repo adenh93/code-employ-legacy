@@ -13,7 +13,7 @@ export async function postApi<T>(url: string, body: any): Promise<T> {
     headers: { "content-type": "application/json" },
     body: JSON.stringify(camelCaseToSnakeCase(body))
   }).catch(error => {
-    throw new Error(error);
+    throw error;
   });
   return handleResponse<T>(response);
 }
@@ -24,7 +24,7 @@ export async function putApi<T>(url: string, body: any): Promise<T> {
     headers: { "content-type": "application/json" },
     body: JSON.stringify(camelCaseToSnakeCase(body))
   }).catch(error => {
-    throw new Error(error);
+    throw error;
   });
   return handleResponse<T>(response);
 }
@@ -33,7 +33,7 @@ export async function deleteApi<T>(url: string, param: any): Promise<T> {
   const response = await fetch(`${url}/${param}`, {
     method: "DELETE"
   }).catch(error => {
-    throw new Error(error);
+    throw error;
   });
   return handleResponse<T>(response);
 }

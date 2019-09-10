@@ -13,6 +13,6 @@ export async function searchJobListings(
     `${baseUrl}/paged`,
     filter
   ).catch(error => {
-    throw new Error(error);
+    throw error;
   });
 }

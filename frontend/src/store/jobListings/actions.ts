@@ -18,14 +18,15 @@ export const loadJobListingsSuccess = (
 
 export const loadJobListings: any = (filter: JobListingSearchFilter) => {
   return async (dispatch: Dispatch) => {
-    try {
-      dispatch(beginApiCall());
-      return jobListingApi.searchJobListings(filter).then(jobListings => {
+    dispatch(beginApiCall());
+    return await jobListingApi
+      .searchJobListings(filter)
+      .then(jobListings => {
         dispatch(loadJobListingsSuccess(jobListings));
+      })
+      .catch(err => {
+        dispatch(apiCallError());
+        throw err;
       });
-    } catch (err) {
-      dispatch(apiCallError());
-      throw err;
-    }
   };
 };
