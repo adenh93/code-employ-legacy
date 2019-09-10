@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from django.http import Http404
 from django.db.models import Q
 from apps.core.managers import PagedResult
-from ..enums import JobPositionType, JobListingState
+from ..enums import JobPositionType, JobListingState, SalaryFrequency
 from ..models import JobListing, JobListingList
 from ..api.serializers import JobListingSearchFilterSerializer
 
@@ -55,6 +55,10 @@ class JobListingSelector():
         if 'position_type' in filter.data:
             query &= Q(position_type=JobPositionType(
                 filter.data['position_type']))
+        if 'salary_frequency' in filter.data:
+            query &= Q(salary_frequency=SalaryFrequency(
+                filter.data['salary_frequency']
+            ))
         if 'salary_min' in filter.data:
             query &= Q(salary__gte=filter.data['salary_min'])
         if 'salary_max' in filter.data and filter.data['salary_max'] > 0:

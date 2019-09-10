@@ -18,7 +18,7 @@ export const JobPositionType = {
   FULLTIME: 4 as JobListingTypes
 };
 
-export const SalaryFrequencyTypes = {
+export const SalaryFrequencyType = {
   PERHOUR: 1 as SalaryFrequencyTypes,
   PERDAY: 2 as SalaryFrequencyTypes,
   PERWEEK: 3 as SalaryFrequencyTypes,

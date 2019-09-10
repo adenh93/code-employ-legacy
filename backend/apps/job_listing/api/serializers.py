@@ -53,6 +53,7 @@ class JobListingSearchFilterSerializer(PaginationFilterSerializer):
         required=False
     )
     position_type = serializers.IntegerField(required=False)
+    salary_frequency = serializers.IntegerField(required=False)
     salary_min = serializers.IntegerField(required=False)
     salary_max = serializers.IntegerField(required=False)
 

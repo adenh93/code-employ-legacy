@@ -86,6 +86,7 @@ export interface JobListingSearchFilter extends PaginationFilter {
   keyword: string;
   languages: string[];
   positionType: number;
+  salaryFrequency: number;
   salaryMin: number;
   salaryMax: number;
 }

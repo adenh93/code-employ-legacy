@@ -6,7 +6,7 @@ import Select from "../../UI/Select";
 import EnumSelect from "../../UI/EnumSelect";
 import Paper from "../../UI/Paper";
 import { yearlyWages } from "../../../common/constants";
-import { JobPositionType } from "../../../common/enums";
+import { JobPositionType, SalaryFrequencyType } from "../../../common/enums";
 
 interface Props {
   jobListingsFilter: JobListingSearchFilter;
@@ -43,6 +43,17 @@ const JobsListFilter: React.SFC<Props> = ({
               label="Position Type"
               value={jobListingsFilter.positionType}
               enumType={JobPositionType}
+              onChange={onUpdateFilter}
+            />
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={4} md={12} lg={12}>
+          <FormControl fullWidth={true}>
+            <EnumSelect
+              name="salaryFrequency"
+              label="Salary Frequency"
+              value={jobListingsFilter.salaryFrequency}
+              enumType={SalaryFrequencyType}
               onChange={onUpdateFilter}
             />
           </FormControl>

@@ -5,7 +5,7 @@ import {
   CLEAR_JOB_LISTINGS_FILTER
 } from "./types";
 import { JobListingSearchFilter } from "../../common/types";
-import { JobPositionType } from "../../common/enums";
+import { JobPositionType, SalaryFrequencyType } from "../../common/enums";
 
 const initialState: JobListingsFilterState = {
   jobListingsFilter: {
@@ -14,7 +14,8 @@ const initialState: JobListingsFilterState = {
     orderByColumn: "created_date",
     orderDirection: false,
     keyword: "",
-    positionType: JobPositionType.FULLTIME
+    positionType: JobPositionType.FULLTIME,
+    salaryFrequency: SalaryFrequencyType.PERYEAR
   } as JobListingSearchFilter
 };
 
