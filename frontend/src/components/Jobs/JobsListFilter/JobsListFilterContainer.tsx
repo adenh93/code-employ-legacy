@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { JobListingSearchFilter } from "../../../common/types";
 import JobsListFilter from "./JobsListFilter";
+import { SalaryFrequencyType } from "../../../common/enums";
+import * as constants from "../../../common/constants";
 
 interface Props {
   jobListingsFilter: JobListingSearchFilter;
@@ -21,12 +23,31 @@ const JobsListFilterContainer: React.SFC<Props> = ({
     const { name, value } = e.target;
     updateFilter({
       ...jobListingsFilter,
-      [name]: value
+      [name]: value || null
     });
   };
+
+  const getSalaryList = () => {
+    switch (jobListingsFilter.salaryFrequency) {
+      case SalaryFrequencyType.PERDAY:
+        return constants.dailySalary;
+      case SalaryFrequencyType.PERFORTNIGHT:
+        return constants.fortnightlySalary;
+      case SalaryFrequencyType.PERHOUR:
+        return constants.hourlySalary;
+      case SalaryFrequencyType.PERMONTH:
+        return constants.monthlySalary;
+      case SalaryFrequencyType.PERWEEK:
+        return constants.weeklySalary;
+      default:
+        return constants.yearlySalary;
+    }
+  };
+
   return (
     <JobsListFilter
       jobListingsFilter={jobListingsFilter}
+      salaryList={getSalaryList()}
       onUpdateFilter={handleChange}
       onClearFilter={clearFilter}
     />

@@ -22,13 +22,16 @@ const CurrencySelect: React.SFC<Props> = ({
   onChange
 }) => (
   <>
-    <InputLabel htmlFor={name}>{label}</InputLabel>
+    <InputLabel shrink htmlFor={name}>
+      {label}
+    </InputLabel>
     <Select
-      value={value}
+      value={value || ""}
       onChange={onChange}
+      displayEmpty
       inputProps={{ name: name, id: name, readOnly: readOnly }}
     >
-      <MenuItem value={0}>{emptyText}</MenuItem>
+      <MenuItem value="">{emptyText}</MenuItem>
       {items.map((item, key) => (
         <MenuItem key={key} value={item}>
           {numeral(item).format("$0,0")}

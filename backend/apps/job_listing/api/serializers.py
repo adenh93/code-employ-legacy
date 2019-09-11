@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from ..models import JobListing, JobListingList
+from ..enums import JobPositionType
 from apps.company.api.serializers import CompanySerializer
 from apps.common.api.serializers import (
     ProgrammingLanguageSerializer, PaginationFilterSerializer,
@@ -47,15 +48,15 @@ class JobListingEditSerializer(serializers.Serializer):
 
 class JobListingSearchFilterSerializer(PaginationFilterSerializer):
     keyword = serializers.CharField(
-        max_length=100, allow_blank=True, required=False)
+        max_length=100, allow_blank=True, default=None, allow_null=True)
     languages = serializers.ListField(
         child=serializers.CharField(),
         required=False
     )
-    position_type = serializers.IntegerField(required=False)
-    salary_frequency = serializers.IntegerField(required=False)
-    salary_min = serializers.IntegerField(required=False)
-    salary_max = serializers.IntegerField(required=False)
+    position_type = serializers.IntegerField(allow_null=True, default=None)
+    salary_frequency = serializers.IntegerField(allow_null=True, default=None)
+    salary_min = serializers.IntegerField(allow_null=True, default=None)
+    salary_max = serializers.IntegerField(allow_null=True, default=None)
 
 
 class JobListingSearchResponseSerializer(PagedResponseSerializer):

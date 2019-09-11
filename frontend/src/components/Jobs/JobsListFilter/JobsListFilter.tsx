@@ -5,17 +5,18 @@ import TextInput from "../../UI/TextInput";
 import CurrencySelect from "../../UI/CurrencySelect";
 import EnumSelect from "../../UI/EnumSelect";
 import Paper from "../../UI/Paper";
-import { yearlyWages } from "../../../common/constants";
 import { JobPositionType, SalaryFrequencyType } from "../../../common/enums";
 
 interface Props {
   jobListingsFilter: JobListingSearchFilter;
+  salaryList: number[];
   onUpdateFilter: (e: any) => void;
   onClearFilter: () => void;
 }
 
 const JobsListFilter: React.SFC<Props> = ({
   jobListingsFilter,
+  salaryList,
   onUpdateFilter,
   onClearFilter
 }) => {
@@ -66,7 +67,7 @@ const JobsListFilter: React.SFC<Props> = ({
               name="salaryMin"
               label="Minimum Salary"
               value={jobListingsFilter.salaryMin}
-              items={yearlyWages}
+              items={salaryList}
               emptyText="Any"
               onChange={onUpdateFilter}
             />
@@ -78,7 +79,7 @@ const JobsListFilter: React.SFC<Props> = ({
               name="salaryMax"
               label="Maximum Salary"
               value={jobListingsFilter.salaryMax}
-              items={yearlyWages}
+              items={salaryList}
               emptyText="Any"
               onChange={onUpdateFilter}
             />

@@ -27,6 +27,7 @@ const JobsListContainer: React.SFC<Props> = ({
   React.useEffect(() => {
     loadJobListings(filter).catch(error => {
       toast.error("Failed to load job listings!");
+      console.log(error);
     });
   }, [filter]);
   return apiCallsInProgress > 0 ? (

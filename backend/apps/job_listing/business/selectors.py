@@ -46,22 +46,21 @@ class JobListingSelector():
     @staticmethod
     def get_paged_job_listings(filter: JobListingSearchFilterSerializer) -> PagedResult:
         query = Q()
-
-        if 'keyword' in filter.data:
+        if filter.data['keyword']:
             query &= (
                 Q(job_title__contains=filter.data['keyword']) |
                 Q(description__contains=filter.data['keyword'])
             )
-        if 'position_type' in filter.data and filter.data['position_type'] > 0:
+        if filter.data['position_type']:
             query &= Q(position_type=JobPositionType(
                 filter.data['position_type']))
-        if 'salary_frequency' in filter.data and filter.data['salary_frequency'] > 0:
+        if filter.data['salary_frequency']:
             query &= Q(salary_frequency=SalaryFrequency(
                 filter.data['salary_frequency']
             ))
-        if 'salary_min' in filter.data:
+        if filter.data['salary_min']:
             query &= Q(salary__gte=filter.data['salary_min'])
-        if 'salary_max' in filter.data and filter.data['salary_max'] > 0:
+        if filter.data['salary_max']:
             query &= Q(salary__lte=filter.data['salary_max'])
         if 'languages' in filter.data:
             query &= Q(languages__contained_by=filter.data['languages'])
