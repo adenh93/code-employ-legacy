@@ -48,8 +48,8 @@ class JobListingSelector():
         query = Q()
         if filter.data['keyword']:
             query &= (
-                Q(job_title__contains=filter.data['keyword']) |
-                Q(description__contains=filter.data['keyword'])
+                Q(job_title__icontains=filter.data['keyword']) |
+                Q(description__icontains=filter.data['keyword'])
             )
         if filter.data['position_type']:
             query &= Q(position_type=JobPositionType(
