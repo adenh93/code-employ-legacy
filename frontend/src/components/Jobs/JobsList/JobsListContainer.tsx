@@ -33,6 +33,8 @@ const JobsListContainer: React.SFC<Props> = ({
   updateFilter,
   clearFilter
 }) => {
+  const waiting = apiCallsInProgress > 0;
+
   React.useEffect(() => {
     reloadJobListings();
   }, []);
@@ -99,6 +101,7 @@ const JobsListContainer: React.SFC<Props> = ({
           onUpdateFilter={handleChangeFilter}
           onUpdateSalaryFrequency={handleSalaryFrequencyChange}
           onClearFilter={handleClearFilter}
+          disabled={waiting}
           onSubmit={handleSubmit}
         />
       </Grid>
@@ -106,7 +109,7 @@ const JobsListContainer: React.SFC<Props> = ({
         <Typography variant="h4" style={{ marginBottom: 10 }}>
           Available Jobs
         </Typography>
-        {apiCallsInProgress > 0 ? (
+        {waiting ? (
           <Spinner size={100} />
         ) : (
           <>

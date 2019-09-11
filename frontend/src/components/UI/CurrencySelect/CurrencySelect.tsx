@@ -8,7 +8,7 @@ interface Props {
   value: any;
   items: any[];
   emptyText?: string;
-  readOnly?: boolean;
+  disabled?: boolean;
   onChange?: (e: any) => void;
 }
 
@@ -18,7 +18,7 @@ const CurrencySelect: React.SFC<Props> = ({
   value,
   items,
   emptyText = "Select a value...",
-  readOnly,
+  disabled,
   onChange
 }) => (
   <>
@@ -29,7 +29,8 @@ const CurrencySelect: React.SFC<Props> = ({
       value={value || ""}
       onChange={onChange}
       displayEmpty
-      inputProps={{ name: name, id: name, readOnly: readOnly }}
+      disabled={disabled}
+      inputProps={{ name: name, id: name }}
     >
       <MenuItem value="">{emptyText}</MenuItem>
       {items.map((item, key) => (

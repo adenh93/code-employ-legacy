@@ -8,8 +8,7 @@ interface Props {
   label?: string;
   placeholder?: string;
   adornment?: any;
-  py?: number;
-  px?: number;
+  disabled?: boolean;
   onChange?: (e: any) => void;
 }
 
@@ -20,6 +19,7 @@ const TextInput: React.SFC<Props> = ({
   value,
   placeholder,
   adornment,
+  disabled,
   onChange
 }) => (
   <TextField
@@ -28,6 +28,7 @@ const TextInput: React.SFC<Props> = ({
     label={label}
     value={value || ""}
     placeholder={placeholder}
+    disabled={disabled}
     InputProps={
       adornment
         ? {

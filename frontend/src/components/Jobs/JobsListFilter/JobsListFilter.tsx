@@ -10,6 +10,7 @@ import { JobPositionType, SalaryFrequencyType } from "../../../common/enums";
 interface Props {
   jobListingsFilter: JobListingSearchFilter;
   salaryList: number[];
+  disabled: boolean;
   onUpdateFilter: (e: any) => void;
   onUpdateSalaryFrequency: (e: any) => void;
   onClearFilter: (e: any) => void;
@@ -19,6 +20,7 @@ interface Props {
 const JobsListFilter: React.SFC<Props> = ({
   jobListingsFilter,
   salaryList,
+  disabled,
   onUpdateFilter,
   onUpdateSalaryFrequency,
   onClearFilter,
@@ -38,6 +40,7 @@ const JobsListFilter: React.SFC<Props> = ({
                 label="Keyword"
                 value={jobListingsFilter.keyword}
                 placeholder="Enter a keyword..."
+                disabled={disabled}
                 onChange={onUpdateFilter}
               />
             </FormControl>
@@ -50,6 +53,7 @@ const JobsListFilter: React.SFC<Props> = ({
                 value={jobListingsFilter.positionType}
                 enumType={JobPositionType}
                 emptyText="Any"
+                disabled={disabled}
                 onChange={onUpdateFilter}
               />
             </FormControl>
@@ -62,6 +66,7 @@ const JobsListFilter: React.SFC<Props> = ({
                 value={jobListingsFilter.salaryFrequency}
                 enumType={SalaryFrequencyType}
                 emptyText="Any"
+                disabled={disabled}
                 onChange={onUpdateSalaryFrequency}
               />
             </FormControl>
@@ -74,6 +79,7 @@ const JobsListFilter: React.SFC<Props> = ({
                 value={jobListingsFilter.salaryMin}
                 items={salaryList}
                 emptyText="Any"
+                disabled={disabled}
                 onChange={onUpdateFilter}
               />
             </FormControl>
@@ -86,6 +92,7 @@ const JobsListFilter: React.SFC<Props> = ({
                 value={jobListingsFilter.salaryMax}
                 items={salaryList}
                 emptyText="Any"
+                disabled={disabled}
                 onChange={onUpdateFilter}
               />
             </FormControl>
@@ -93,12 +100,21 @@ const JobsListFilter: React.SFC<Props> = ({
           <Grid item xs={12}>
             <Grid container spacing={1}>
               <Grid item>
-                <Button variant="contained" onClick={onClearFilter}>
+                <Button
+                  variant="contained"
+                  disabled={disabled}
+                  onClick={onClearFilter}
+                >
                   Reset
                 </Button>
               </Grid>
               <Grid item>
-                <Button variant="contained" color="primary" type="submit">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  disabled={disabled}
+                >
                   Search
                 </Button>
               </Grid>
