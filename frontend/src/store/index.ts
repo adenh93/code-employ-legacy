@@ -5,16 +5,20 @@ import jobListingsFilter from "./jobListingFilter/reducers";
 import { JobListingsFilterState } from "./jobListingFilter/types";
 import apiStatus from "./apiStatus/reducers";
 import { ApiStatusState } from "./apiStatus/types";
+import lookupCodes from "./lookupCodes/reducers";
+import { LookupCodesState } from "./lookupCodes/types";
 
 export interface ApplicationState {
   jobListings: JobListingsState;
   jobListingsFilter: JobListingsFilterState;
+  lookupCodes: LookupCodesState;
   apiStatus: ApiStatusState;
 }
 
 export const rootReducer = combineReducers<ApplicationState>({
   jobListings,
   jobListingsFilter,
+  lookupCodes,
   apiStatus
 });
 

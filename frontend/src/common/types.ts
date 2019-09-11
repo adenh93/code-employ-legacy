@@ -95,6 +95,11 @@ export interface JobListingSearchResponse extends PagedResponse {
   items: JobListingList[];
 }
 
+export interface LookupCodeList {
+  programmingLanguages: ProgrammingLanguage[];
+  countries: LocationCountryCode[];
+}
+
 export interface NavBarItem {
   label: string;
   route: string;
