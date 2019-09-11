@@ -33,3 +33,8 @@ class PaginationFilterSerializer(serializers.Serializer):
 
 class PagedResponseSerializer(serializers.Serializer):
     record_count = serializers.IntegerField()
+
+
+class LookupCodeListSerializer(serializers.Serializer):
+    programming_languages = ProgrammingLanguageSerializer(many=True)
+    countries = LocationCountryCodeSerializer(many=True)

@@ -1,11 +1,13 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from ..business.selectors import ProgrammingLanguageSelector
-from .serializers import ProgrammingLanguageSerializer
+from ..business.selectors import ProgrammingLanguageSelector, LocationSelector
+from .serializers import ProgrammingLanguageSerializer, LookupCodeListSerializer
 
 
-class ProgrammingLanguageListView(APIView):
+class LookupCodeListView(APIView):
     def get(self, request):
-        search_response = ProgrammingLanguageSelector.get_programming_languages()
-        serialized = ProgrammingLanguageSerializer(search_response, many=True)
+        languages = ProgrammingLanguageSelector.get_programming_languages()
+        countries = LocationSelector.get_country_codes()
+        serialized = LookupCodeListSerializer(
+            {'programming_languages': languages, 'countries': countries})
         return Response(serialized.data)

@@ -1,10 +1,10 @@
 from django.urls import path
 from .views import (
-    ProgrammingLanguageListView
+    LookupCodeListView
 )
 
 
 urlpatterns = [
-    path('programming-languages/all',
-         ProgrammingLanguageListView.as_view(), name="programming-languages-all"),
+    path('codes/all',
+         LookupCodeListView.as_view(), name="lookup-codes-all"),
 ]
