@@ -10,6 +10,7 @@ class ModelManager(models.Manager):
     A custom manager class to support filtered and
     paginated query results.
     """
+
     def get_paginated(self, query, paginated_filter):
         items_per_page = paginated_filter.data['items_per_page']
         current_page = paginated_filter.data['current_page']
@@ -21,6 +22,8 @@ class ModelManager(models.Manager):
         items = super(ModelManager, self).get_queryset().filter(query).order_by(
             f'{"" if order_direction else "-"}{order_by_column}'
         )[offset:limit]
-        record_count = super(ModelManager, self).get_queryset().all().count()
+
+        record_count = super(
+            ModelManager, self).get_queryset().filter(query).count()
 
         return PagedResult(items=items, record_count=record_count)

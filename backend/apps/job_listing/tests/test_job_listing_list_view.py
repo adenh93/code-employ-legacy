@@ -170,7 +170,7 @@ class GetJobListingListTests(JobListingListViewTest):
         )
 
         expected_items = JobListingList.objects.filter(expected_filter)[0:20]
-        expected_count = JobListingList.objects.all().count()
+        expected_count = JobListingList.objects.filter(expected_filter).count()
 
         expected_result = PagedResult(
             items=expected_items,
