@@ -1,7 +1,8 @@
 import { camelCase, transform, snakeCase } from "lodash";
 
 export async function getApi<T>(url: string, param?: any): Promise<T> {
-  const response = await fetch(`${url}/${param}`).catch(error => {
+  const getUrl = param ? `${url}/${param}` : url;
+  const response = await fetch(getUrl).catch(error => {
     throw new Error(error);
   });
   return handleResponse<T>(response);

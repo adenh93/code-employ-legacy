@@ -13,6 +13,7 @@ class LocationCountryCode(models.Model):
 class LocationStateCode(models.Model):
     country = models.ForeignKey(
         LocationCountryCode,
+        related_name='states',
         on_delete=models.CASCADE
     )
     code = models.TextField(null=False, max_length=10)

@@ -19,6 +19,8 @@ class LocationStateCodeSerializer(serializers.ModelSerializer):
 
 
 class LocationCountryCodeSerializer(serializers.ModelSerializer):
+    states = LocationStateCodeSerializer(many=True)
+
     class Meta:
         model = LocationCountryCode
         fields = '__all__'
