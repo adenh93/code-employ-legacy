@@ -20,11 +20,16 @@ class LocationSelector():
 class ProgrammingLanguageSelector():
 
     @staticmethod
+    def get_programming_languages() -> List[ProgrammingLanguage]:
+        return ProgrammingLanguage.objects.all()
+
+    @staticmethod
     def get_programming_language_by_id(id: int) -> ProgrammingLanguage:
         try:
             return ProgrammingLanguage.objects.get(id=id)
         except ProgrammingLanguage.DoesNotExist:
-            raise Http404(f'ProgrammingLanguage with id {id} could not be found')
+            raise Http404(
+                f'ProgrammingLanguage with id {id} could not be found')
 
 
 class TagSelector():

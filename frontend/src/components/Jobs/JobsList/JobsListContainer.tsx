@@ -44,7 +44,7 @@ const JobsListContainer: React.SFC<Props> = ({
     });
   };
 
-  const handleChange = (e: any) => {
+  const handleChangeFilter = (e: any) => {
     const { name, value } = e.target;
     updateFilter({
       ...filter,
@@ -52,7 +52,7 @@ const JobsListContainer: React.SFC<Props> = ({
     });
   };
 
-  const handleClear = (e: any): void => {
+  const handleClearFilter = (e: any): void => {
     clearFilter();
   };
 
@@ -96,9 +96,9 @@ const JobsListContainer: React.SFC<Props> = ({
         <JobsListFilter
           jobListingsFilter={filter}
           salaryList={getSalaryList()}
-          onUpdateFilter={handleChange}
+          onUpdateFilter={handleChangeFilter}
           onUpdateSalaryFrequency={handleSalaryFrequencyChange}
-          onClearFilter={handleClear}
+          onClearFilter={handleClearFilter}
           onSubmit={handleSubmit}
         />
       </Grid>

@@ -18,7 +18,8 @@ class JobListingViewTest(APITransactionTestCase):
     def setUp(self):
         country = mixer.blend(LocationCountryCode)
         state = mixer.blend(LocationStateCode, country_id=country.id)
-        company = mixer.blend(Company, state_id=state.id, country_id=country.id)
+        company = mixer.blend(Company, state_id=state.id,
+                              country_id=country.id)
 
         mixer.cycle(2).blend(
             JobListing,
@@ -28,7 +29,7 @@ class JobListingViewTest(APITransactionTestCase):
         )
 
 
-class GetJobListingsTests(JobListingViewTest):
+class GetJobListingTests(JobListingViewTest):
 
     def test_get_job_listing_by_id(self):
         """
