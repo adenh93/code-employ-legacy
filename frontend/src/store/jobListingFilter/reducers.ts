@@ -12,7 +12,8 @@ const initialState: JobListingsFilterState = {
     itemsPerPage: 5,
     orderByColumn: "created_date",
     orderDirection: false,
-    keyword: ""
+    keyword: "",
+    languages: []
   } as JobListingSearchFilter
 };
 

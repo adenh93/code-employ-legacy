@@ -1,4 +1,4 @@
-import { SalaryFrequencyTypes, SalaryFrequencyType } from "./enums";
+import { SalaryFrequencyTypes, SalaryFrequencyType } from "../enums";
 
 export const yearlySalary = [
   50000,

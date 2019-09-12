@@ -62,7 +62,7 @@ class JobListingSelector():
             query &= Q(salary__gte=filter.data['salary_min'])
         if filter.data['salary_max']:
             query &= Q(salary__lte=filter.data['salary_max'])
-        if 'languages' in filter.data:
-            query &= Q(languages__contained_by=filter.data['languages'])
+        if filter.data['languages']:
+            query &= Q(languages__overlap=filter.data['languages'])
 
         return JobListingList.objects.get_paginated(query, filter)

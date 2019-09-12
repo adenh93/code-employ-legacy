@@ -6,10 +6,13 @@ import EnumSelect from "../../UI/EnumSelect";
 import Paper from "../../UI/Paper";
 import { JobPositionType, SalaryFrequencyType } from "../../../common/enums";
 import { FormValues } from "./JobsListFilterContainer";
+import MultiSelect from "../../UI/MultiSelect";
+import { ProgrammingLanguage } from "../../../common/types";
 
 interface Props {
   values: FormValues;
   salaryList: number[];
+  programmingLanguages: ProgrammingLanguage[];
   disabled: boolean;
   onUpdateFilter: any;
   onUpdateSalaryFrequency: (e: any) => void;
@@ -20,6 +23,7 @@ interface Props {
 const JobsListFilter: React.SFC<Props> = ({
   values,
   salaryList,
+  programmingLanguages,
   disabled,
   onUpdateFilter,
   onUpdateSalaryFrequency,
@@ -91,6 +95,19 @@ const JobsListFilter: React.SFC<Props> = ({
                 label="Maximum Salary"
                 value={values.salaryMax}
                 items={salaryList}
+                emptyText="Any"
+                disabled={disabled}
+                onChange={onUpdateFilter}
+              />
+            </FormControl>
+          </Grid>
+          <Grid item xs={12}>
+            <FormControl fullWidth={true}>
+              <MultiSelect
+                name="languages"
+                label="Programming Languages"
+                value={values.languages}
+                items={programmingLanguages}
                 emptyText="Any"
                 disabled={disabled}
                 onChange={onUpdateFilter}

@@ -51,7 +51,8 @@ class JobListingSearchFilterSerializer(PaginationFilterSerializer):
         max_length=100, allow_blank=True, default=None, allow_null=True)
     languages = serializers.ListField(
         child=serializers.CharField(),
-        required=False
+        required=False,
+        default=None
     )
     position_type = serializers.IntegerField(allow_null=True, default=None)
     salary_frequency = serializers.IntegerField(allow_null=True, default=None)

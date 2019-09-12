@@ -1,17 +1,18 @@
 import * as React from "react";
 import { withFormik, FormikProps } from "formik";
-import { JobListingSearchFilter } from "../../../common/types";
+import { JobListingSearchFilter, LookupCodeList } from "../../../common/types";
 import * as filterActions from "../../../store/jobListingFilter/actions";
 import { Dispatch } from "redux";
 import { connect } from "react-redux";
 import { ApplicationState } from "../../../store";
 import { JobPositionTypes, SalaryFrequencyTypes } from "../../../common/enums";
 import JobsListFilter from "./JobsListFilter";
-import { getSalaryList } from "../../../common/salaryList";
+import { getSalaryList } from "../../../common/data/salaryList";
 
 interface Props {
   filter: JobListingSearchFilter;
   apiCallsInProgress: number;
+  lookupCodes: LookupCodeList;
   updateFilter: (filter: JobListingSearchFilter) => void;
   clearFilter: () => void;
 }
@@ -49,7 +50,8 @@ const JobsListFilterContainer: React.SFC<Props & FormikProps<FormValues>> = ({
   setValues,
   initialValues,
   clearFilter,
-  apiCallsInProgress
+  apiCallsInProgress,
+  lookupCodes
 }) => {
   const waiting = apiCallsInProgress > 0;
   const salaryList = getSalaryList(values.salaryFrequency);
@@ -69,6 +71,7 @@ const JobsListFilterContainer: React.SFC<Props & FormikProps<FormValues>> = ({
     <JobsListFilter
       values={values}
       salaryList={salaryList}
+      programmingLanguages={lookupCodes.programmingLanguages}
       onUpdateFilter={handleChange}
       onUpdateSalaryFrequency={handleSalaryFrequencyChange}
       onClearFilter={() => handleFormReset()}
@@ -80,6 +83,7 @@ const JobsListFilterContainer: React.SFC<Props & FormikProps<FormValues>> = ({
 const mapStateToProps = (state: ApplicationState) => {
   return {
     filter: state.jobListingsFilter.jobListingsFilter,
+    lookupCodes: state.lookupCodes.lookupCodes,
     apiCallsInProgress: state.apiStatus.apiCallsInProgress
   };
 };
