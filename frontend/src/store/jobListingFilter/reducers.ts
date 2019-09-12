@@ -26,7 +26,7 @@ export default function jobListingsFilterReducer(
         jobListingsFilter: action.filter
       };
     case CLEAR_JOB_LISTINGS_FILTER:
-      return { ...initialState };
+      return initialState;
     default:
       return state;
   }

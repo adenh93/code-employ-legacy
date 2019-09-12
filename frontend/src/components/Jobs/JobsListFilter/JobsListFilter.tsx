@@ -1,24 +1,24 @@
 import * as React from "react";
-import { JobListingSearchFilter } from "../../../common/types";
 import { Typography, Button, FormControl, Grid, Box } from "@material-ui/core";
 import TextInput from "../../UI/TextInput";
 import CurrencySelect from "../../UI/CurrencySelect";
 import EnumSelect from "../../UI/EnumSelect";
 import Paper from "../../UI/Paper";
 import { JobPositionType, SalaryFrequencyType } from "../../../common/enums";
+import { FormValues } from "./JobsListFilterContainer";
 
 interface Props {
-  jobListingsFilter: JobListingSearchFilter;
+  values: FormValues;
   salaryList: number[];
   disabled: boolean;
-  onUpdateFilter: (e: any) => void;
+  onUpdateFilter: any;
   onUpdateSalaryFrequency: (e: any) => void;
-  onClearFilter: (e: any) => void;
-  onSubmit: (e: any) => void;
+  onClearFilter: () => void;
+  onSubmit: any;
 }
 
 const JobsListFilter: React.SFC<Props> = ({
-  jobListingsFilter,
+  values,
   salaryList,
   disabled,
   onUpdateFilter,
@@ -38,7 +38,7 @@ const JobsListFilter: React.SFC<Props> = ({
               <TextInput
                 name="keyword"
                 label="Keyword"
-                value={jobListingsFilter.keyword}
+                value={values.keyword}
                 placeholder="Enter a keyword..."
                 disabled={disabled}
                 onChange={onUpdateFilter}
@@ -50,7 +50,7 @@ const JobsListFilter: React.SFC<Props> = ({
               <EnumSelect
                 name="positionType"
                 label="Position Type"
-                value={jobListingsFilter.positionType}
+                value={values.positionType}
                 enumType={JobPositionType}
                 emptyText="Any"
                 disabled={disabled}
@@ -63,7 +63,7 @@ const JobsListFilter: React.SFC<Props> = ({
               <EnumSelect
                 name="salaryFrequency"
                 label="Salary Frequency"
-                value={jobListingsFilter.salaryFrequency}
+                value={values.salaryFrequency}
                 enumType={SalaryFrequencyType}
                 emptyText="Any"
                 disabled={disabled}
@@ -76,7 +76,7 @@ const JobsListFilter: React.SFC<Props> = ({
               <CurrencySelect
                 name="salaryMin"
                 label="Minimum Salary"
-                value={jobListingsFilter.salaryMin}
+                value={values.salaryMin}
                 items={salaryList}
                 emptyText="Any"
                 disabled={disabled}
@@ -89,7 +89,7 @@ const JobsListFilter: React.SFC<Props> = ({
               <CurrencySelect
                 name="salaryMax"
                 label="Maximum Salary"
-                value={jobListingsFilter.salaryMax}
+                value={values.salaryMax}
                 items={salaryList}
                 emptyText="Any"
                 disabled={disabled}

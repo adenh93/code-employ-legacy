@@ -1,14 +1,14 @@
-export type JobPositionType = 1 | 2 | 3 | 4 | 5 | 6;
+export type JobPositionTypes = 1 | 2 | 3 | 4 | 5 | 6;
 export type JobListingTypes = 1 | 2 | 3 | 4;
 export type SalaryFrequencyTypes = 1 | 2 | 3 | 4 | 5 | 6;
 
 export const JobListingState = {
-  DRAFT: 1 as JobPositionType,
-  PREPUBLISH: 2 as JobPositionType,
-  PUBLISH: 3 as JobPositionType,
-  EXPIRED: 4 as JobPositionType,
-  CLOSED: 5 as JobPositionType,
-  ARCHIVED: 6 as JobPositionType
+  DRAFT: 1 as JobPositionTypes,
+  PREPUBLISH: 2 as JobPositionTypes,
+  PUBLISH: 3 as JobPositionTypes,
+  EXPIRED: 4 as JobPositionTypes,
+  CLOSED: 5 as JobPositionTypes,
+  ARCHIVED: 6 as JobPositionTypes
 };
 
 export const JobPositionType = {

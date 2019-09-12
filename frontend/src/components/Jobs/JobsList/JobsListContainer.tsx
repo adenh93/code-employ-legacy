@@ -3,7 +3,6 @@ import JobsList from "./JobsList";
 import { connect } from "react-redux";
 import { ApplicationState } from "../../../store";
 import * as jobListingActions from "../../../store/jobListings/actions";
-import * as filterActions from "../../../store/jobListingFilter/actions";
 import { Dispatch } from "redux";
 import {
   JobListingSearchResponse,
@@ -11,33 +10,29 @@ import {
 } from "../../../common/types";
 import Spinner from "../../UI/Spinner";
 import { toast } from "react-toastify";
-import JobsListFilter from "../JobsListFilter";
-import { Grid, Typography } from "@material-ui/core";
-import { SalaryFrequencyType } from "../../../common/enums";
-import * as constants from "../../../common/constants";
 
 interface Props {
   jobListings: JobListingSearchResponse;
   filter: JobListingSearchFilter;
   apiCallsInProgress: number;
   loadJobListings: (filter: JobListingSearchFilter) => Promise<void>;
-  updateFilter: (filter: JobListingSearchFilter) => void;
-  clearFilter: () => void;
 }
 
 const JobsListContainer: React.SFC<Props> = ({
   jobListings,
   filter,
   apiCallsInProgress,
-  loadJobListings,
-  updateFilter,
-  clearFilter
+  loadJobListings
 }) => {
   const waiting = apiCallsInProgress > 0;
 
   React.useEffect(() => {
     reloadJobListings();
   }, []);
+
+  React.useEffect(() => {
+    reloadJobListings();
+  }, [filter]);
 
   const reloadJobListings = (): void => {
     loadJobListings(filter).catch(error => {
@@ -46,78 +41,14 @@ const JobsListContainer: React.SFC<Props> = ({
     });
   };
 
-  const handleChangeFilter = (e: any) => {
-    const { name, value } = e.target;
-    updateFilter({
-      ...filter,
-      [name]: value || null
-    });
-  };
-
-  const handleClearFilter = (e: any): void => {
-    clearFilter();
-  };
-
-  const handleSalaryFrequencyChange = (e: any) => {
-    const { value } = e.target;
-    if (filter.salaryFrequency != value) {
-      updateFilter({
-        ...filter,
-        salaryFrequency: value,
-        salaryMin: null,
-        salaryMax: null
-      });
-    }
-  };
-
-  const handleSubmit = (e: any): void => {
-    e.preventDefault();
-    reloadJobListings();
-  };
-
-  const getSalaryList = (): number[] => {
-    switch (filter.salaryFrequency) {
-      case SalaryFrequencyType.PERDAY:
-        return constants.dailySalary;
-      case SalaryFrequencyType.PERFORTNIGHT:
-        return constants.fortnightlySalary;
-      case SalaryFrequencyType.PERHOUR:
-        return constants.hourlySalary;
-      case SalaryFrequencyType.PERMONTH:
-        return constants.monthlySalary;
-      case SalaryFrequencyType.PERWEEK:
-        return constants.weeklySalary;
-      default:
-        return constants.yearlySalary;
-    }
-  };
-
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={3}>
-        <JobsListFilter
-          jobListingsFilter={filter}
-          salaryList={getSalaryList()}
-          onUpdateFilter={handleChangeFilter}
-          onUpdateSalaryFrequency={handleSalaryFrequencyChange}
-          onClearFilter={handleClearFilter}
-          disabled={waiting}
-          onSubmit={handleSubmit}
-        />
-      </Grid>
-      <Grid item xs={9}>
-        <Typography variant="h4" style={{ marginBottom: 10 }}>
-          Available Jobs
-        </Typography>
-        {waiting ? (
-          <Spinner size={100} />
-        ) : (
-          <>
-            <JobsList jobListings={jobListings} />
-          </>
-        )}
-      </Grid>
-    </Grid>
+    <>
+      {waiting ? (
+        <Spinner size={100} />
+      ) : (
+        <JobsList jobListings={jobListings} />
+      )}
+    </>
   );
 };
 
@@ -130,9 +61,6 @@ const mapStateToProps = (state: ApplicationState) => {
 };
 const mapDispatchtoProps = (dispatch: Dispatch) => {
   const actions = {
-    updateFilter: (filter: JobListingSearchFilter) =>
-      dispatch(filterActions.updateJobListingsFilter(filter)),
-    clearFilter: () => dispatch(filterActions.clearJobListingsFilter()),
     loadJobListings: (filter: JobListingSearchFilter) =>
       dispatch(jobListingActions.loadJobListings(filter))
   };

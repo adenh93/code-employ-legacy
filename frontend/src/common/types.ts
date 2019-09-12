@@ -1,3 +1,5 @@
+import { JobPositionTypes, SalaryFrequencyTypes } from "./enums";
+
 export interface LocationCountryCode {
   id: number;
   name: string;
@@ -85,8 +87,8 @@ export interface PagedResponse {
 export interface JobListingSearchFilter extends PaginationFilter {
   keyword: string;
   languages: string[];
-  positionType: number;
-  salaryFrequency: number;
+  positionType: JobPositionTypes;
+  salaryFrequency: SalaryFrequencyTypes;
   salaryMin: number;
   salaryMax: number;
 }
