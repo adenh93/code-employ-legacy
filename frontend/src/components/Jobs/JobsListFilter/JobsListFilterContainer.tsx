@@ -74,12 +74,13 @@ const JobsListFilterContainer: React.SFC<Props & FormikProps<FormValues>> = ({
       programmingLanguages={lookupCodes.programmingLanguages}
       onUpdateFilter={handleChange}
       onUpdateSalaryFrequency={handleSalaryFrequencyChange}
-      onClearFilter={() => handleFormReset()}
+      onClearFilter={handleFormReset}
       disabled={waiting}
       onSubmit={handleSubmit}
     />
   );
 };
+
 const mapStateToProps = (state: ApplicationState) => {
   return {
     filter: state.jobListingsFilter.jobListingsFilter,
