@@ -5,7 +5,6 @@ import {
 } from "../types";
 import { initialState } from "../reducers";
 import { loadJobListings } from "../../jobListings/actions";
-import { clearJobListingsFilter } from "../actions";
 
 export function* handleUpdateFilter({ filter }: any) {
   yield put(loadJobListings(filter));

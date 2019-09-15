@@ -2,14 +2,14 @@ import { all, put, call, select, takeLatest } from "redux-saga/effects";
 import { LOAD_JOB_LISTINGS, LOAD_JOB_LISTINGS_INITIAL } from "../types";
 import { loadJobListingsSuccess, loadJobListings } from "../actions";
 import { beginApiCall, apiCallError } from "../../apiStatus/actions";
-import { searchJobListings } from "../../../api/jobListingApi";
+import * as jobListingApi from "../../../api/jobListingApi";
 import { jobListingFilterSelector } from "../../jobListingFilter/selectors";
 
 export function* handleLoadJobListings({ filter }: any) {
   yield put(beginApiCall());
 
   try {
-    const jobListings = yield call(searchJobListings, filter);
+    const jobListings = yield call(jobListingApi.searchJobListings, filter);
     yield put(loadJobListingsSuccess(jobListings));
   } catch (err) {
     yield put(apiCallError());
