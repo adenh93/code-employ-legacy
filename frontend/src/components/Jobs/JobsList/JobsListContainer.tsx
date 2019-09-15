@@ -4,42 +4,25 @@ import { connect } from "react-redux";
 import { ApplicationState } from "../../../store";
 import * as jobListingActions from "../../../store/jobListings/actions";
 import { Dispatch } from "redux";
-import {
-  JobListingSearchResponse,
-  JobListingSearchFilter
-} from "../../../common/types";
+import { JobListingSearchResponse } from "../../../common/types";
 import Spinner from "../../UI/Spinner";
-import { toast } from "react-toastify";
 
 interface Props {
   jobListings: JobListingSearchResponse;
-  filter: JobListingSearchFilter;
   apiCallsInProgress: number;
-  loadJobListings: (filter: JobListingSearchFilter) => Promise<void>;
+  loadJobListingsInitial: () => void;
 }
 
 const JobsListContainer: React.SFC<Props> = ({
   jobListings,
-  filter,
   apiCallsInProgress,
-  loadJobListings
+  loadJobListingsInitial
 }) => {
   const waiting = apiCallsInProgress > 0;
 
   React.useEffect(() => {
-    reloadJobListings();
+    loadJobListingsInitial();
   }, []);
-
-  React.useEffect(() => {
-    reloadJobListings();
-  }, [filter]);
-
-  const reloadJobListings = (): void => {
-    loadJobListings(filter).catch(error => {
-      toast.error("Failed to load job listings!");
-      console.log(error);
-    });
-  };
 
   return (
     <>
@@ -55,14 +38,13 @@ const JobsListContainer: React.SFC<Props> = ({
 const mapStateToProps = (state: ApplicationState) => {
   return {
     jobListings: state.jobListings.jobListings,
-    filter: state.jobListingsFilter.jobListingsFilter,
     apiCallsInProgress: state.apiStatus.apiCallsInProgress
   };
 };
 const mapDispatchtoProps = (dispatch: Dispatch) => {
   const actions = {
-    loadJobListings: (filter: JobListingSearchFilter) =>
-      dispatch(jobListingActions.loadJobListings(filter))
+    loadJobListingsInitial: () =>
+      dispatch(jobListingActions.loadJobListingsInitial())
   };
   return actions;
 };

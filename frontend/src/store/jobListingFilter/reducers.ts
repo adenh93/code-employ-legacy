@@ -6,7 +6,7 @@ import {
 } from "./types";
 import { JobListingSearchFilter } from "../../common/types";
 
-const initialState: JobListingsFilterState = {
+export const initialState: JobListingsFilterState = {
   jobListingsFilter: {
     currentPage: 1,
     itemsPerPage: 5,

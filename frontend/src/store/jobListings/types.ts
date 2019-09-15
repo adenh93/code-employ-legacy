@@ -1,5 +1,10 @@
-import { JobListingSearchResponse } from "../../common/types";
+import {
+  JobListingSearchResponse,
+  JobListingSearchFilter
+} from "../../common/types";
 
+export const LOAD_JOB_LISTINGS = "LOAD_JOB_LISTINGS";
+export const LOAD_JOB_LISTINGS_INITIAL = "LOAD_JOB_LISTINGS_INITIAL";
 export const LOAD_JOB_LISTINGS_SUCCESS = "LOAD_JOB_LISTINGS_SUCCESS";
 
 export interface JobListingsState {
@@ -7,8 +12,20 @@ export interface JobListingsState {
 }
 
 export interface LoadJobListingsAction {
+  type: typeof LOAD_JOB_LISTINGS;
+  filter: JobListingSearchFilter;
+}
+
+export interface LoadJobListingsInitialAction {
+  type: typeof LOAD_JOB_LISTINGS_INITIAL;
+}
+
+export interface LoadJobListingsSuccessAction {
   type: typeof LOAD_JOB_LISTINGS_SUCCESS;
   jobListings: JobListingSearchResponse;
 }
 
-export type JobListingsActionTypes = LoadJobListingsAction;
+export type JobListingsActionTypes =
+  | LoadJobListingsAction
+  | LoadJobListingsInitialAction
+  | LoadJobListingsSuccessAction;

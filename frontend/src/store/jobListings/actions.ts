@@ -1,11 +1,13 @@
-import { LOAD_JOB_LISTINGS_SUCCESS, JobListingsActionTypes } from "./types";
+import {
+  LOAD_JOB_LISTINGS_SUCCESS,
+  LOAD_JOB_LISTINGS,
+  JobListingsActionTypes,
+  LOAD_JOB_LISTINGS_INITIAL
+} from "./types";
 import {
   JobListingSearchResponse,
   JobListingSearchFilter
 } from "../../common/types";
-import { Dispatch } from "redux";
-import * as jobListingApi from "../../api/jobListingApi";
-import { beginApiCall, apiCallError } from "../apiStatus/actions";
 
 export const loadJobListingsSuccess = (
   jobListings: JobListingSearchResponse
@@ -16,17 +18,17 @@ export const loadJobListingsSuccess = (
   };
 };
 
-export const loadJobListings: any = (filter: JobListingSearchFilter) => {
-  return async (dispatch: Dispatch) => {
-    dispatch(beginApiCall());
-    return await jobListingApi
-      .searchJobListings(filter)
-      .then(jobListings => {
-        dispatch(loadJobListingsSuccess(jobListings));
-      })
-      .catch(err => {
-        dispatch(apiCallError());
-        throw err;
-      });
+export const loadJobListingsInitial = (): JobListingsActionTypes => {
+  return {
+    type: LOAD_JOB_LISTINGS_INITIAL
+  };
+};
+
+export const loadJobListings = (
+  filter: JobListingSearchFilter
+): JobListingsActionTypes => {
+  return {
+    type: LOAD_JOB_LISTINGS,
+    filter
   };
 };
