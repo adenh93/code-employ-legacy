@@ -11,9 +11,7 @@ const JobsListPage = () => (
         <JobsListFilter />
       </Grid>
       <Grid item xs={9}>
-        <Typography variant="h4" style={{ marginBottom: 10 }}>
-          Available Jobs
-        </Typography>
+        <Typography variant="h4">Available Jobs</Typography>
         <JobsList />
         <JobsListPaginator />
       </Grid>

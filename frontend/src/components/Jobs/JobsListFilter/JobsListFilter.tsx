@@ -38,7 +38,7 @@ const JobsListFilter: React.SFC<Props> = ({
             <Typography variant="h5">Filter</Typography>
           </Grid>
           <Grid item xs={12} sm={4} md={12}>
-            <FormControl fullWidth={true}>
+            <FormControl fullWidth>
               <TextInput
                 name="keyword"
                 label="Keyword"
@@ -50,7 +50,7 @@ const JobsListFilter: React.SFC<Props> = ({
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={4} md={12} lg={12}>
-            <FormControl fullWidth={true}>
+            <FormControl fullWidth>
               <EnumSelect
                 name="positionType"
                 label="Position Type"
@@ -63,7 +63,7 @@ const JobsListFilter: React.SFC<Props> = ({
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={4} md={12} lg={12}>
-            <FormControl fullWidth={true}>
+            <FormControl fullWidth>
               <EnumSelect
                 name="salaryFrequency"
                 label="Salary Frequency"
@@ -76,7 +76,7 @@ const JobsListFilter: React.SFC<Props> = ({
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={4} md={12} lg={6}>
-            <FormControl fullWidth={true}>
+            <FormControl fullWidth>
               <CurrencySelect
                 name="salaryMin"
                 label="Minimum Salary"
@@ -89,7 +89,7 @@ const JobsListFilter: React.SFC<Props> = ({
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={4} md={12} lg={6}>
-            <FormControl fullWidth={true}>
+            <FormControl fullWidth>
               <CurrencySelect
                 name="salaryMax"
                 label="Maximum Salary"
@@ -102,7 +102,7 @@ const JobsListFilter: React.SFC<Props> = ({
             </FormControl>
           </Grid>
           <Grid item xs={12}>
-            <FormControl fullWidth={true}>
+            <FormControl fullWidth>
               <MultiSelect
                 name="languages"
                 label="Programming Languages"

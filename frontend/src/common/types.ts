@@ -111,6 +111,11 @@ export interface NavBarItem {
   route: string;
 }
 
+export interface SortColumn {
+  label: string;
+  value: string;
+}
+
 export interface NotificationMessage {
   message: string;
   show: boolean;

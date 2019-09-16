@@ -1,6 +1,7 @@
 export type JobPositionTypes = 1 | 2 | 3 | 4 | 5 | 6;
 export type JobListingTypes = 1 | 2 | 3 | 4;
 export type SalaryFrequencyTypes = 1 | 2 | 3 | 4 | 5 | 6;
+export type OrderDirectionTypes = 1 | 2;
 export type NotificationTypes = "success" | "error" | "warning" | "info";
 
 export const JobListingState = {
@@ -26,6 +27,11 @@ export const SalaryFrequencyType = {
   PERFORTNIGHT: 4 as SalaryFrequencyTypes,
   PERMONTH: 5 as SalaryFrequencyTypes,
   PERYEAR: 6 as SalaryFrequencyTypes
+};
+
+export const OrderDirection = {
+  DESC: 0 as SalaryFrequencyTypes,
+  ASC: 1 as SalaryFrequencyTypes
 };
 
 export const NotificationType = {
@@ -54,6 +60,10 @@ export const EnumLabelDictionary = {
   PERFORTNIGHT: "Per-fortnight",
   PERMONTH: "Per-month",
   PERYEAR: "Per-year",
+
+  ASC: "Ascending",
+  DESC: "Descending",
+
   get: function(type: any, value: any) {
     return this[Object.keys(type).find(key => type[key] === value)];
   }

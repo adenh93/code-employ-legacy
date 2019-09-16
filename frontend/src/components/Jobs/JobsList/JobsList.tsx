@@ -8,14 +8,11 @@ interface Props {
 }
 
 const JobsList: React.SFC<Props> = ({ jobListings }) => {
-  const { recordCount, items } = jobListings;
+  const { items } = jobListings;
   return (
     <>
       {items.length ? (
         <>
-          <Typography variant="body1">
-            Showing {items.length} of {recordCount}
-          </Typography>
           <Grid container spacing={3}>
             {items.map(job => {
               return (
