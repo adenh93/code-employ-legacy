@@ -18,7 +18,7 @@ const EnumSelect: React.SFC<Props> = ({
   enumType,
   value,
   disabled,
-  emptyText = "Select a value...",
+  emptyText,
   onChange
 }) => (
   <>
@@ -32,7 +32,7 @@ const EnumSelect: React.SFC<Props> = ({
       disabled={disabled}
       inputProps={{ name: name, id: name }}
     >
-      <MenuItem value="">{emptyText}</MenuItem>
+      {emptyText ? <MenuItem value="">{emptyText}</MenuItem> : ""}
       {GetEnumList(enumType).map((item, key) => (
         <MenuItem key={key} value={item}>
           {EnumLabelDictionary.get(enumType, item)}
