@@ -8,6 +8,7 @@ from ..api.serializers import JobListingSearchResponseSerializer
 from ..enums import JobPositionType, SalaryFrequency
 from apps.company.models import Company
 from apps.core.managers import PagedResult
+from apps.common.enums import OrderDirectionEnum
 from apps.common.models import (
     LocationStateCode,
     LocationCountryCode,
@@ -106,7 +107,7 @@ class GetJobListingListTests(JobListingListViewTest):
         request_body = {
             'current_page': 1,
             'items_per_page': 20,
-            'order_direction': True
+            'order_direction': OrderDirectionEnum.ASC.value
         }
 
         response = self.client.post(
@@ -151,7 +152,7 @@ class GetJobListingListTests(JobListingListViewTest):
             'salary_max': salary_max_filter,
             'current_page': 1,
             'items_per_page': 20,
-            'order_direction': True
+            'order_direction': OrderDirectionEnum.ASC.value
         }
 
         response = self.client.post(
@@ -196,7 +197,7 @@ class GetJobListingListTests(JobListingListViewTest):
             'order_by_column': 'salary',
             'current_page': 1,
             'items_per_page': 20,
-            'order_direction': False
+            'order_direction': OrderDirectionEnum.DESC.value
         }
 
         response = self.client.post(
