@@ -1,6 +1,7 @@
 export type JobPositionTypes = 1 | 2 | 3 | 4 | 5 | 6;
 export type JobListingTypes = 1 | 2 | 3 | 4;
 export type SalaryFrequencyTypes = 1 | 2 | 3 | 4 | 5 | 6;
+export type NotificationTypes = "success" | "error" | "warning" | "info";
 
 export const JobListingState = {
   DRAFT: 1 as JobPositionTypes,
@@ -25,6 +26,13 @@ export const SalaryFrequencyType = {
   PERFORTNIGHT: 4 as SalaryFrequencyTypes,
   PERMONTH: 5 as SalaryFrequencyTypes,
   PERYEAR: 6 as SalaryFrequencyTypes
+};
+
+export const NotificationType = {
+  SUCCESS: "success" as NotificationTypes,
+  ERROR: "error" as NotificationTypes,
+  WARNING: "warning" as NotificationTypes,
+  INFO: "info" as NotificationTypes
 };
 
 export const EnumLabelDictionary = {

@@ -1,4 +1,8 @@
-import { JobPositionTypes, SalaryFrequencyTypes } from "./enums";
+import {
+  JobPositionTypes,
+  SalaryFrequencyTypes,
+  NotificationTypes
+} from "./enums";
 
 export interface LocationCountryCode {
   id: number;
@@ -107,8 +111,8 @@ export interface NavBarItem {
   route: string;
 }
 
-export interface Notification {
+export interface NotificationMessage {
   message: string;
-  variant: "success" | "error" | "warning" | "info";
-  duration?: number;
+  show: boolean;
+  variant: NotificationTypes;
 }

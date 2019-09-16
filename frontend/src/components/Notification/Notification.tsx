@@ -12,8 +12,9 @@ import WarningIcon from "@material-ui/icons/Warning";
 import InfoIcon from "@material-ui/icons/Info";
 import CloseIcon from "@material-ui/icons/Close";
 import * as styles from "./styles.module.scss";
+import { NotificationTypes } from "../../common/enums";
 
-const variantIcon = {
+const variantIcon: any = {
   success: CheckCircleIcon,
   warning: WarningIcon,
   error: ErrorIcon,
@@ -22,18 +23,20 @@ const variantIcon = {
 
 interface Props {
   open: boolean;
-  variant: keyof typeof variantIcon;
+  variant: NotificationTypes;
   message: string;
   duration?: number;
-  onClose: () => void;
+  onClose?: () => void;
+  onExited?: () => void;
 }
 
 const Notification: React.SFC<Props> = ({
   open,
-  variant,
+  variant = "success",
   message,
   duration = 3000,
-  onClose
+  onClose,
+  onExited
 }) => {
   const Icon = variantIcon[variant];
   return (
@@ -42,6 +45,7 @@ const Notification: React.SFC<Props> = ({
       className={styles.notification}
       autoHideDuration={duration}
       onClose={onClose}
+      onExited={onExited}
       anchorOrigin={{
         vertical: "top",
         horizontal: "right"

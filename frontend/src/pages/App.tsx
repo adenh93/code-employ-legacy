@@ -3,9 +3,9 @@ import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "../components/UI/Header";
 import HomePage from "./Home/HomePage";
 import JobsList from "./Jobs/JobsListPage";
-import { NotificationContainer as Notification } from "../components/Notification";
 import { NavBarItem } from "../common/types";
 import { Grid } from "@material-ui/core";
+import { NotificationContainer as Notification } from "../components/Notification";
 
 const navItems: NavBarItem[] = [
   { label: "Home", route: "/" },

@@ -41,6 +41,7 @@ const mapStateToProps = (state: ApplicationState) => {
     apiCallsInProgress: state.apiStatus.apiCallsInProgress
   };
 };
+
 const mapDispatchtoProps = (dispatch: Dispatch) => {
   const actions = {
     loadJobListingsInitial: () =>

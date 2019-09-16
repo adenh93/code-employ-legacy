@@ -1,15 +1,47 @@
 import * as React from "react";
-import Notification from "./Notification";
+import ToastNotification from "./Notification";
+import { NotificationMessage } from "../../common/types";
+import { ApplicationState } from "../../store";
+import * as notificationActions from "../../store/notification/actions";
+import { Dispatch } from "redux";
+import { connect } from "react-redux";
 
-interface Props {}
+interface Props {
+  notification: NotificationMessage;
+  hideNotification: () => void;
+  destroyNotification: () => void;
+}
 
-export const NotificationContainer: React.SFC<Props> = () => {
-  return (
-    <Notification
-      open={true}
-      variant="success"
-      message="This is a test message!"
-      onClose={null}
-    />
-  );
+const NotificationContainer: React.SFC<Props> = ({
+  notification,
+  hideNotification,
+  destroyNotification
+}) => (
+  <ToastNotification
+    open={notification.show}
+    variant={notification.variant}
+    message={notification.message}
+    onClose={hideNotification}
+    onExited={destroyNotification}
+  />
+);
+
+const mapStateToProps = (state: ApplicationState) => {
+  return {
+    notification: state.notification.notification
+  };
 };
+
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  const actions = {
+    hideNotification: () => dispatch(notificationActions.hideNotification()),
+    destroyNotification: () =>
+      dispatch(notificationActions.destroyNotification())
+  };
+  return actions;
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NotificationContainer);
