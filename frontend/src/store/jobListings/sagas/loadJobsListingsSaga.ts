@@ -1,9 +1,15 @@
 import { all, put, call, select, takeLatest } from "redux-saga/effects";
 import { LOAD_JOB_LISTINGS, LOAD_JOB_LISTINGS_INITIAL } from "../types";
 import { loadJobListingsSuccess, loadJobListings } from "../actions";
-import { beginApiCall, apiCallError } from "../../apiStatus/actions";
+import {
+  beginApiCall,
+  apiCallError,
+  apiCallSuccess
+} from "../../apiStatus/actions";
 import * as jobListingApi from "../../../api/jobListingApi";
 import { jobListingFilterSelector } from "../../jobListingFilter/selectors";
+import { showNotification } from "../../notification/actions";
+import { NotificationType } from "../../../common/enums";
 
 export function* handleLoadJobListings({ filter }: any) {
   yield put(beginApiCall());
@@ -11,9 +17,12 @@ export function* handleLoadJobListings({ filter }: any) {
   try {
     const jobListings = yield call(jobListingApi.searchJobListings, filter);
     yield put(loadJobListingsSuccess(jobListings));
+    yield put(apiCallSuccess());
   } catch (err) {
     yield put(apiCallError());
-    throw err;
+    yield put(
+      showNotification("Failed to load job listings", NotificationType.ERROR)
+    );
   }
 }
 

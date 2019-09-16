@@ -25,7 +25,6 @@ interface Props {
   open: boolean;
   variant: NotificationTypes;
   message: string;
-  duration?: number;
   onClose?: () => void;
   onExited?: () => void;
 }
@@ -34,7 +33,6 @@ const Notification: React.SFC<Props> = ({
   open,
   variant = "success",
   message,
-  duration = 3000,
   onClose,
   onExited
 }) => {
@@ -43,7 +41,7 @@ const Notification: React.SFC<Props> = ({
     <Snackbar
       open={open}
       className={styles.notification}
-      autoHideDuration={duration}
+      autoHideDuration={5000}
       onClose={onClose}
       onExited={onExited}
       anchorOrigin={{
