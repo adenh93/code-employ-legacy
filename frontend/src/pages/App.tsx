@@ -3,6 +3,7 @@ import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "../components/UI/Header";
 import HomePage from "./Home/HomePage";
 import JobsList from "./Jobs/JobsListPage";
+import { NotificationContainer as Notification } from "../components/Notification";
 import { NavBarItem } from "../common/types";
 import { Grid } from "@material-ui/core";
 
@@ -20,6 +21,7 @@ const App = () => (
           <Route exact path="/" component={HomePage} />
           <Route exact path="/Jobs" component={JobsList} />
         </Switch>
+        <Notification />
       </Grid>
     </Grid>
   </Router>
