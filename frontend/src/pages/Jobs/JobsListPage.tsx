@@ -2,6 +2,7 @@ import * as React from "react";
 import { JobsListContainer as JobsList } from "../../components/Jobs/JobsList";
 import { Grid, Typography } from "@material-ui/core";
 import { JobsListFilterContainer as JobsListFilter } from "../../components/Jobs/JobsListFilter";
+import { JobsListPaginator } from "../../components/Jobs/JobsListPaginator";
 
 const JobsListPage = () => (
   <div>
@@ -14,6 +15,7 @@ const JobsListPage = () => (
           Available Jobs
         </Typography>
         <JobsList />
+        <JobsListPaginator />
       </Grid>
     </Grid>
   </div>

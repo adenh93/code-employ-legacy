@@ -1,6 +1,5 @@
 import * as React from "react";
-import { TablePagination, Typography } from "@material-ui/core";
-import * as styles from "./styles.module.scss";
+import { TablePagination } from "@material-ui/core";
 
 interface Props {
   page: number;
@@ -8,8 +7,8 @@ interface Props {
   count: number;
   labelRowsPerPage?: string;
   rowsPerPageOptions?: number[];
-  onChangeRowsPerPage: (e: object) => void;
-  onChangePage: (e: object, page: number) => void;
+  onChangeRowsPerPage: (e: any) => void;
+  onChangePage: (e: any, page: number) => void;
 }
 
 const fontSize = "1rem";
