@@ -13,12 +13,12 @@ it("should increment the amount of apiCallsInProgress when passed BEGIN_API_CALL
   expect(newState.apiCallsInProgress).toEqual(1);
 });
 
-it("should decrement the amount of apiCallsInProgress when passed any SUCCESS action", () => {
+it("should decrement the amount of apiCallsInProgress when passed API_CALL_SUCCESS", () => {
   const initialState: ApiStatusState = {
     apiCallsInProgress: 1
   };
 
-  const action = { type: "TEST_SUCCESS" };
+  const action = actions.apiCallSuccess();
   const newState = apiStatusReducer(initialState, action);
 
   expect(newState.apiCallsInProgress).toEqual(0);

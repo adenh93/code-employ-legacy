@@ -1,7 +1,10 @@
-import { BEGIN_API_CALL, API_CALL_ERROR, ApiStatusState } from "./types";
-
-const actionTypeEndsInSuccess = (type: any) =>
-  type.substring(type.length - 8) === "_SUCCESS";
+import {
+  BEGIN_API_CALL,
+  API_CALL_SUCCESS,
+  API_CALL_ERROR,
+  ApiStatusState,
+  ApiStatusActionTypes
+} from "./types";
 
 const initialState: ApiStatusState = {
   apiCallsInProgress: 0
@@ -9,19 +12,19 @@ const initialState: ApiStatusState = {
 
 export default function apiStatusReducer(
   state: ApiStatusState = initialState,
-  action: any
+  action: ApiStatusActionTypes
 ): ApiStatusState {
-  if (action.type == BEGIN_API_CALL) {
-    return {
-      apiCallsInProgress: state.apiCallsInProgress + 1
-    };
-  } else if (
-    action.type === API_CALL_ERROR ||
-    actionTypeEndsInSuccess(action.type)
-  ) {
-    return {
-      apiCallsInProgress: state.apiCallsInProgress - 1
-    };
+  switch (action.type) {
+    case BEGIN_API_CALL:
+      return {
+        apiCallsInProgress: state.apiCallsInProgress + 1
+      };
+    case API_CALL_SUCCESS:
+    case API_CALL_ERROR:
+      return {
+        apiCallsInProgress: state.apiCallsInProgress - 1
+      };
+    default:
+      return state;
   }
-  return state;
 }

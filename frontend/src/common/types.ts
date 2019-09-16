@@ -106,3 +106,9 @@ export interface NavBarItem {
   label: string;
   route: string;
 }
+
+export interface Notification {
+  message: string;
+  variant: "success" | "error" | "warning" | "info";
+  duration?: number;
+}

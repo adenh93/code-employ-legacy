@@ -7,7 +7,7 @@ import {
   LocationCountryCode
 } from "../../../common/types";
 
-it("Should handle loading lookup codes", () => {
+it("should handle loading lookup codes", () => {
   const store = createStore(rootReducer);
   const lookupCodes: LookupCodeList = {
     programmingLanguages: <ProgrammingLanguage[]>[{ name: "A" }],
