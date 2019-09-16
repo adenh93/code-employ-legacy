@@ -5,13 +5,14 @@ import {
   CLEAR_JOB_LISTINGS_FILTER
 } from "./types";
 import { JobListingSearchFilter } from "../../common/types";
+import { OrderDirection } from "../../common/enums";
 
 export const initialState: JobListingsFilterState = {
   jobListingsFilter: {
     currentPage: 1,
     itemsPerPage: 5,
     orderByColumn: "created_date",
-    orderDirection: false,
+    orderDirection: OrderDirection.DESC,
     keyword: "",
     languages: []
   } as JobListingSearchFilter

@@ -1,5 +1,6 @@
 from django.db import models
 from collections import namedtuple
+from apps.common.enums import OrderDirectionEnum
 
 
 PagedResult = namedtuple('PagedResult', ['items', 'record_count'])
@@ -20,7 +21,7 @@ class ModelManager(models.Manager):
         offset = limit - items_per_page
 
         items = super(ModelManager, self).get_queryset().filter(query).order_by(
-            f'{"" if order_direction else "-"}{order_by_column}'
+            f'{"" if order_direction == OrderDirectionEnum.ASC.value else "-"}{order_by_column}'
         )[offset:limit]
 
         record_count = super(

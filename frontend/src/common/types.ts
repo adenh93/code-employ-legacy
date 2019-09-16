@@ -1,7 +1,8 @@
 import {
   JobPositionTypes,
   SalaryFrequencyTypes,
-  NotificationTypes
+  NotificationTypes,
+  OrderDirectionTypes
 } from "./enums";
 
 export interface LocationCountryCode {
@@ -81,7 +82,7 @@ export interface PaginationFilter {
   currentPage: number;
   itemsPerPage: number;
   orderByColumn: string;
-  orderDirection: boolean;
+  orderDirection: OrderDirectionTypes;
 }
 
 export interface PagedResponse {

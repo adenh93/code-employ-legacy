@@ -30,8 +30,8 @@ export const SalaryFrequencyType = {
 };
 
 export const OrderDirection = {
-  DESC: 0 as SalaryFrequencyTypes,
-  ASC: 1 as SalaryFrequencyTypes
+  DESC: 1 as SalaryFrequencyTypes,
+  ASC: 2 as SalaryFrequencyTypes
 };
 
 export const NotificationType = {

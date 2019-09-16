@@ -12,14 +12,18 @@ import { connect } from "react-redux";
 interface Props {
   filter: JobListingSearchFilter;
   jobListings: JobListingSearchResponse;
+  apiCallsInProgress: number;
   updateFilter: (filter: JobListingSearchFilter) => void;
 }
 
 const JobsListPaginator: React.SFC<Props> = ({
   filter,
   jobListings,
+  apiCallsInProgress,
   updateFilter
 }) => {
+  const waiting = apiCallsInProgress > 0;
+
   const handleChangeRowsPerPage = (e: any) => {
     updateFilter({ ...filter, currentPage: 1, itemsPerPage: e.target.value });
   };
@@ -29,21 +33,28 @@ const JobsListPaginator: React.SFC<Props> = ({
   };
 
   return (
-    <Paginator
-      page={filter.currentPage - 1}
-      rowsPerPage={filter.itemsPerPage}
-      count={jobListings.recordCount}
-      labelRowsPerPage="Listings per page"
-      onChangeRowsPerPage={handleChangeRowsPerPage}
-      onChangePage={handleChangePage}
-    />
+    <>
+      {!waiting ? (
+        <Paginator
+          page={filter.currentPage - 1}
+          rowsPerPage={filter.itemsPerPage}
+          count={jobListings.recordCount}
+          labelRowsPerPage="Listings per page"
+          onChangeRowsPerPage={handleChangeRowsPerPage}
+          onChangePage={handleChangePage}
+        />
+      ) : (
+        ""
+      )}
+    </>
   );
 };
 
 const mapStateToProps = (state: ApplicationState) => {
   return {
     filter: state.jobListingsFilter.jobListingsFilter,
-    jobListings: state.jobListings.jobListings
+    jobListings: state.jobListings.jobListings,
+    apiCallsInProgress: state.apiStatus.apiCallsInProgress
   };
 };
 

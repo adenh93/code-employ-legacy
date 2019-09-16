@@ -13,7 +13,7 @@ interface Props {
   onChangeOrderDirection: (e: any) => void;
 }
 
-const ListOrderColumn: React.SFC<Props> = ({
+const OrderBySortBy: React.SFC<Props> = ({
   sortColumns,
   columnValue,
   orderDirectionValue,
@@ -45,4 +45,4 @@ const ListOrderColumn: React.SFC<Props> = ({
   </Grid>
 );
 
-export default ListOrderColumn;
+export default OrderBySortBy;
