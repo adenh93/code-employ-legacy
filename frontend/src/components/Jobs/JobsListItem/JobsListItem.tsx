@@ -10,6 +10,12 @@ import {
 } from "../../../common/enums";
 import ChipList from "../../UI/ChipList";
 import * as styles from "./styles.module.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faMapMarkerAlt,
+  faMoneyBillAlt,
+  faClock
+} from "@fortawesome/free-solid-svg-icons";
 import * as moment from "moment";
 
 interface Props {
@@ -25,6 +31,7 @@ const JobsListItem: React.SFC<Props> = ({ jobListing }) => {
         </Grid>
         <Grid item xs={2}>
           <Typography style={{ textAlign: "right" }} variant="body2">
+            <FontAwesomeIcon className={styles.clockIcon} icon={faClock} />
             {moment(jobListing.createdDate).fromNow()}
           </Typography>
         </Grid>
@@ -43,6 +50,10 @@ const JobsListItem: React.SFC<Props> = ({ jobListing }) => {
         {jobListing.salary ? (
           <Grid item xs={12}>
             <Typography variant="body1">
+              <FontAwesomeIcon
+                className={styles.cashIcon}
+                icon={faMoneyBillAlt}
+              />{" "}
               {numeral(jobListing.salary).format("$0,0")}{" "}
               {EnumLabelDictionary.get(
                 SalaryFrequencyType,
@@ -57,6 +68,10 @@ const JobsListItem: React.SFC<Props> = ({ jobListing }) => {
       <Grid container style={{ marginBottom: 20 }}>
         <Grid item xs={12}>
           <Typography variant="body1" color="textPrimary">
+            <FontAwesomeIcon
+              className={styles.locationIcon}
+              icon={faMapMarkerAlt}
+            />{" "}
             {jobListing.city}, {jobListing.stateName}
           </Typography>
         </Grid>
