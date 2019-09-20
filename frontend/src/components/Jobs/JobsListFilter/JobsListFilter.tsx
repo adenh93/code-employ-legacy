@@ -8,13 +8,13 @@ import {
 } from "@material-ui/core";
 import TextInput from "../../UI/TextInput";
 import CurrencySelect from "../../UI/CurrencySelect";
-import EnumSelect from "../../UI/EnumSelect";
 import Paper from "../../UI/Paper";
 import { JobPositionType, SalaryFrequencyType } from "../../../common/enums";
 import { FormValues } from "./JobsListFilterContainer";
 import MultiSelect from "../../UI/MultiSelect";
 import { ProgrammingLanguage } from "../../../common/types";
-import EnumCheckboxList from "../../UI/EnumCheckboxList/EnumCheckboxList";
+import EnumCheckboxList from "../../UI/EnumCheckboxList";
+import EnumRadioGroup from "../../UI/EnumRadioGroup";
 
 interface Props {
   values: FormValues;
@@ -59,8 +59,8 @@ const JobsListFilter: React.SFC<Props> = ({
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={4} md={12} lg={12}>
-            <Typography variant="h6">Salary</Typography>
-            <Divider style={{ width: "40%" }} />
+            <Typography variant="h6">Position</Typography>
+            <Divider style={{ width: "50%" }} />
             <EnumCheckboxList
               name="positionTypes"
               enumType={JobPositionType}
@@ -69,17 +69,14 @@ const JobsListFilter: React.SFC<Props> = ({
             />
           </Grid>
           <Grid item xs={12} sm={4} md={12} lg={12}>
-            <FormControl fullWidth>
-              <EnumSelect
-                name="salaryFrequency"
-                label="Salary Frequency"
-                value={values.salaryFrequency}
-                enumType={SalaryFrequencyType}
-                emptyText="Any"
-                disabled={disabled}
-                onChange={onUpdateSalaryFrequency}
-              />
-            </FormControl>
+            <Typography variant="h6">Frequency</Typography>
+            <Divider style={{ width: "50%" }} />
+            <EnumRadioGroup
+              name="salaryFrequency"
+              enumType={SalaryFrequencyType}
+              value={values.salaryFrequency}
+              onChange={onUpdateSalaryFrequency}
+            />
           </Grid>
           <Grid item xs={12} sm={4} md={12} lg={6}>
             <FormControl fullWidth>

@@ -6,7 +6,6 @@ import {
   Checkbox
 } from "@material-ui/core";
 import { GetEnumList, EnumLabelDictionary } from "../../../common/enums";
-import { Field } from "formik";
 
 interface Props {
   enumType: any;

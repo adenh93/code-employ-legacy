@@ -44,7 +44,6 @@ const formikEnhancer = withFormik<Props, FormValues>({
 
 const JobsListFilterContainer: React.SFC<Props & FormikProps<FormValues>> = ({
   values,
-  handleChange,
   handleSubmit,
   setFieldValue,
   setValues,
@@ -59,6 +58,12 @@ const JobsListFilterContainer: React.SFC<Props & FormikProps<FormValues>> = ({
   const handleFormReset = () => {
     setValues(initialValues);
     clearFilter();
+  };
+
+  const handleChange = (e: any) => {
+    const { value, name } = e.target;
+    const newValue = isNaN(value) ? value : parseInt(value);
+    setFieldValue(name, newValue);
   };
 
   const handleSalaryFrequencyChange = (e: any) => {
