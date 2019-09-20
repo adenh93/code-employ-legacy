@@ -92,7 +92,7 @@ export interface PagedResponse {
 export interface JobListingSearchFilter extends PaginationFilter {
   keyword: string;
   languages: string[];
-  positionType: JobPositionTypes;
+  positionTypes: JobPositionTypes[];
   salaryFrequency: SalaryFrequencyTypes;
   salaryMin: number;
   salaryMax: number;

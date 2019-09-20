@@ -14,6 +14,7 @@ export const initialState: JobListingsFilterState = {
     orderByColumn: "created_date",
     orderDirection: OrderDirection.DESC,
     keyword: "",
+    positionTypes: [],
     languages: []
   } as JobListingSearchFilter
 };

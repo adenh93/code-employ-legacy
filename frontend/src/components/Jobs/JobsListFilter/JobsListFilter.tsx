@@ -1,5 +1,11 @@
 import * as React from "react";
-import { Typography, Button, FormControl, Grid, Box } from "@material-ui/core";
+import {
+  Typography,
+  Button,
+  FormControl,
+  Grid,
+  Divider
+} from "@material-ui/core";
 import TextInput from "../../UI/TextInput";
 import CurrencySelect from "../../UI/CurrencySelect";
 import EnumSelect from "../../UI/EnumSelect";
@@ -8,6 +14,7 @@ import { JobPositionType, SalaryFrequencyType } from "../../../common/enums";
 import { FormValues } from "./JobsListFilterContainer";
 import MultiSelect from "../../UI/MultiSelect";
 import { ProgrammingLanguage } from "../../../common/types";
+import EnumCheckboxList from "../../UI/EnumCheckboxList/EnumCheckboxList";
 
 interface Props {
   values: FormValues;
@@ -16,6 +23,7 @@ interface Props {
   disabled: boolean;
   onUpdateFilter: any;
   onUpdateSalaryFrequency: (e: any) => void;
+  onUpdateCheckGroup: (name: string, value: any[]) => void;
   onClearFilter: () => void;
   onSubmit: any;
 }
@@ -27,6 +35,7 @@ const JobsListFilter: React.SFC<Props> = ({
   disabled,
   onUpdateFilter,
   onUpdateSalaryFrequency,
+  onUpdateCheckGroup,
   onClearFilter,
   onSubmit
 }) => {
@@ -50,17 +59,14 @@ const JobsListFilter: React.SFC<Props> = ({
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={4} md={12} lg={12}>
-            <FormControl fullWidth>
-              <EnumSelect
-                name="positionType"
-                label="Position Type"
-                value={values.positionType}
-                enumType={JobPositionType}
-                emptyText="Any"
-                disabled={disabled}
-                onChange={onUpdateFilter}
-              />
-            </FormControl>
+            <Typography variant="h6">Salary</Typography>
+            <Divider style={{ width: "40%" }} />
+            <EnumCheckboxList
+              name="positionTypes"
+              enumType={JobPositionType}
+              checkedItems={values.positionTypes}
+              onChange={onUpdateCheckGroup}
+            />
           </Grid>
           <Grid item xs={12} sm={4} md={12} lg={12}>
             <FormControl fullWidth>

@@ -14,7 +14,7 @@ const ChipList: React.SFC<Props> = ({
 }) => (
   <>
     {items.map((item, key) => (
-      <Grid item>
+      <Grid item key={key}>
         <Chip label={item} color={color} variant={variant} />
       </Grid>
     ))}

@@ -54,7 +54,11 @@ class JobListingSearchFilterSerializer(PaginationFilterSerializer):
         required=False,
         default=None
     )
-    position_type = serializers.IntegerField(allow_null=True, default=None)
+    position_types = serializers.ListField(
+        child=serializers.IntegerField(),
+        required=False,
+        default=None
+    )
     salary_frequency = serializers.IntegerField(allow_null=True, default=None)
     salary_min = serializers.IntegerField(allow_null=True, default=None)
     salary_max = serializers.IntegerField(allow_null=True, default=None)

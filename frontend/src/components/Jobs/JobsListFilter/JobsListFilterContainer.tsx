@@ -20,7 +20,7 @@ interface Props {
 export interface FormValues {
   keyword: string;
   languages: string[];
-  positionType: JobPositionTypes;
+  positionTypes: JobPositionTypes[];
   salaryFrequency: SalaryFrequencyTypes;
   salaryMin: number;
   salaryMax: number;
@@ -30,7 +30,7 @@ const formikEnhancer = withFormik<Props, FormValues>({
   mapPropsToValues: ({ filter }) => ({
     keyword: filter.keyword,
     languages: filter.languages,
-    positionType: filter.positionType,
+    positionTypes: filter.positionTypes,
     salaryFrequency: filter.salaryFrequency,
     salaryMin: filter.salaryMin,
     salaryMax: filter.salaryMax
@@ -67,6 +67,9 @@ const JobsListFilterContainer: React.SFC<Props & FormikProps<FormValues>> = ({
     setFieldValue("salaryMax", undefined);
   };
 
+  const handleCheckboxGroupChange = (name: string, value: any[]) =>
+    setFieldValue(name, value);
+
   return (
     <JobsListFilter
       values={values}
@@ -74,6 +77,7 @@ const JobsListFilterContainer: React.SFC<Props & FormikProps<FormValues>> = ({
       programmingLanguages={lookupCodes.programmingLanguages}
       onUpdateFilter={handleChange}
       onUpdateSalaryFrequency={handleSalaryFrequencyChange}
+      onUpdateCheckGroup={handleCheckboxGroupChange}
       onClearFilter={handleFormReset}
       disabled={waiting}
       onSubmit={handleSubmit}

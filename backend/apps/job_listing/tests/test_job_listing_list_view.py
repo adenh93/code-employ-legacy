@@ -138,7 +138,7 @@ class GetJobListingListTests(JobListingListViewTest):
 
         keyword_filter = 'developer'
         language_filter = ['Python']
-        position_type_filter = JobPositionType.CONTRACT.value
+        position_types_filter = [JobPositionType.CONTRACT.value]
         salary_frequency_filter = SalaryFrequency.PERDAY.value
         salary_min_filter = 0
         salary_max_filter = 850
@@ -146,7 +146,7 @@ class GetJobListingListTests(JobListingListViewTest):
         request_body = {
             'keyword': keyword_filter,
             'languages': language_filter,
-            'position_type': position_type_filter,
+            'position_types': position_types_filter,
             'salary_frequency': salary_frequency_filter,
             'salary_min': salary_min_filter,
             'salary_max': salary_max_filter,
@@ -164,7 +164,7 @@ class GetJobListingListTests(JobListingListViewTest):
             (Q(job_title__contains=keyword_filter) |
              Q(description__contains=keyword_filter)) &
             Q(languages__contained_by=language_filter) &
-            Q(position_type=JobPositionType(position_type_filter)) &
+            Q(position_type__in=[JobPositionType(x) for x in position_types_filter]) &
             Q(salary_frequency=SalaryFrequency(salary_frequency_filter)) &
             Q(salary__gte=salary_min_filter) &
             Q(salary__lte=salary_max_filter)
