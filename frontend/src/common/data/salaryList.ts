@@ -1,15 +1,6 @@
 import { SalaryFrequencyTypes, SalaryFrequencyType } from "../enums";
 
-export const yearlySalary = [
-  50000,
-  70000,
-  90000,
-  110000,
-  130000,
-  150000,
-  170000,
-  190000
-];
+export const yearlySalary = [50000, 70000, 90000, 110000, 130000];
 
 export const monthlySalary = yearlySalary.map(
   val => Math.round(val / 12 / 1000) * 1000

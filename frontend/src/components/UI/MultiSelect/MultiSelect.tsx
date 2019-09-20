@@ -4,14 +4,16 @@ import {
   InputLabel,
   MenuItem,
   ListItemText,
-  Checkbox
+  Checkbox,
+  FormControl
 } from "@material-ui/core";
 
 interface Props {
   name: string;
   items: any[];
   value: any[];
-  label: string;
+  fullWidth?: boolean;
+  label?: string;
   emptyText?: string;
   disabled?: boolean;
   onChange: (e: any) => void;
@@ -21,15 +23,20 @@ const MultiSelect: React.SFC<Props> = ({
   name,
   items,
   value,
+  fullWidth = true,
   label,
   emptyText = "Select an option...",
   disabled,
   onChange
 }) => (
-  <>
-    <InputLabel shrink htmlFor={name}>
-      {label}
-    </InputLabel>
+  <FormControl fullWidth={fullWidth}>
+    {label ? (
+      <InputLabel shrink htmlFor={name}>
+        {label}
+      </InputLabel>
+    ) : (
+      ""
+    )}
     <Select
       multiple
       displayEmpty
@@ -54,7 +61,7 @@ const MultiSelect: React.SFC<Props> = ({
         );
       })}
     </Select>
-  </>
+  </FormControl>
 );
 
 export default MultiSelect;

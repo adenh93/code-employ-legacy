@@ -2,9 +2,10 @@ import * as React from "react";
 import {
   FormControl,
   FormGroup,
-  FormControlLabel,
-  Checkbox
+  Divider,
+  FormControlLabel
 } from "@material-ui/core";
+import Checkbox from "../Checkbox";
 import { GetEnumList, EnumLabelDictionary } from "../../../common/enums";
 
 interface Props {
@@ -31,22 +32,26 @@ const EnumCheckboxList: React.SFC<Props> = ({
     onChange(name, values);
   };
 
+  const items = GetEnumList(enumType);
+
   return (
-    <FormControl component="fieldset">
+    <FormControl fullWidth component="fieldset">
       <FormGroup>
-        {GetEnumList(enumType).map((item, key) => (
-          <FormControlLabel
-            key={key}
-            control={
-              <Checkbox
-                checked={checkedItems.includes(item)}
-                onChange={handleChange}
-                value={item}
-                name={name}
-              />
-            }
-            label={EnumLabelDictionary.get(enumType, item)}
-          />
+        {items.map((item, key) => (
+          <div key={key}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={checkedItems.includes(item)}
+                  onChange={handleChange}
+                  value={item}
+                  name={name}
+                />
+              }
+              label={EnumLabelDictionary.get(enumType, item)}
+            />
+            {key != items.length - 1 ? <Divider /> : ""}
+          </div>
         ))}
       </FormGroup>
     </FormControl>

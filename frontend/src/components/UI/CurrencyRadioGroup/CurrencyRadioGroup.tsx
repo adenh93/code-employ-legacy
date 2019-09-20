@@ -6,24 +6,23 @@ import {
   Divider
 } from "@material-ui/core";
 import Radio from "../Radio";
-import { GetEnumList, EnumLabelDictionary } from "../../../common/enums";
+import * as numeral from "numeral";
 
 interface Props {
   name: string;
-  enumType: any;
+  items: number[];
   value: number;
   onChange: (e: any) => void;
 }
 
-const EnumRadioGroup: React.SFC<Props> = ({
+const CurrencyRadioGroup: React.SFC<Props> = ({
   name,
-  enumType,
+  items,
   value,
   onChange
 }) => {
-  const items = GetEnumList(enumType);
   return (
-    <FormControl fullWidth component="fieldset">
+    <FormControl component="fieldset" fullWidth>
       <RadioGroup name={name} value={value || ""} onChange={onChange}>
         {items.map((item, key) => (
           <div key={key}>
@@ -32,9 +31,9 @@ const EnumRadioGroup: React.SFC<Props> = ({
               control={
                 <Radio name={name} value={item} checked={value == item} />
               }
-              label={EnumLabelDictionary.get(enumType, item)}
+              label={numeral(item).format("$0,0") + "+"}
             />
-            {key != items.length - 1 ? <Divider light /> : ""}
+            {key != items.length - 1 ? <Divider /> : ""}
           </div>
         ))}
       </RadioGroup>
@@ -42,4 +41,4 @@ const EnumRadioGroup: React.SFC<Props> = ({
   );
 };
 
-export default EnumRadioGroup;
+export default CurrencyRadioGroup;
