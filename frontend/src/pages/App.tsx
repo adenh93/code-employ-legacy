@@ -15,8 +15,15 @@ const navItems: NavBarItem[] = [
 const App = () => (
   <Router>
     <Header title="CodeEmploy" navItems={navItems} />
-    <Grid container style={{ padding: 20 }}>
-      <Grid item xs={12}>
+    <Grid
+      container
+      justify="center"
+      style={{
+        backgroundColor: "rgb(250, 250, 250)",
+        paddingTop: 20
+      }}
+    >
+      <Grid item xs={11}>
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/Jobs" component={JobsList} />

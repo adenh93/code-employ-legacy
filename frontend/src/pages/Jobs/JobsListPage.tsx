@@ -8,10 +8,10 @@ import { JobsListOrderBySortBy } from "../../components/Jobs/JobsListOrderBySort
 const JobsListPage = () => (
   <div>
     <Grid container spacing={3}>
-      <Grid item xs={2}>
+      <Grid item xs={3}>
         <JobsListFilter />
       </Grid>
-      <Grid item xs={10}>
+      <Grid item xs={9}>
         <Typography variant="h4">Available Jobs</Typography>
         <Grid container spacing={3}>
           <Grid item xs={8}>

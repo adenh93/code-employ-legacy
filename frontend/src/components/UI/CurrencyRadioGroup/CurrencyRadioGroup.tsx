@@ -6,6 +6,7 @@ import {
   Divider
 } from "@material-ui/core";
 import Radio from "../Radio";
+import CheckboxRadioLabel from "../CheckboxRadioLabel";
 import * as numeral from "numeral";
 
 interface Props {
@@ -24,18 +25,24 @@ const CurrencyRadioGroup: React.SFC<Props> = ({
   return (
     <FormControl component="fieldset" fullWidth>
       <RadioGroup name={name} value={value || ""} onChange={onChange}>
-        {items.map((item, key) => (
-          <div key={key}>
-            <FormControlLabel
-              value={item}
-              control={
-                <Radio name={name} value={item} checked={value == item} />
-              }
-              label={numeral(item).format("$0,0") + "+"}
-            />
-            {key != items.length - 1 ? <Divider /> : ""}
-          </div>
-        ))}
+        {items.map((item, key) => {
+          const checked = value == item;
+          return (
+            <div key={key}>
+              <FormControlLabel
+                value={item}
+                control={<Radio name={name} value={item} checked={checked} />}
+                label={
+                  <CheckboxRadioLabel
+                    checked={checked}
+                    label={numeral(item).format("$0,0") + "+"}
+                  />
+                }
+              />
+              {key != items.length - 1 ? <Divider /> : ""}
+            </div>
+          );
+        })}
       </RadioGroup>
     </FormControl>
   );
