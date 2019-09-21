@@ -11,6 +11,7 @@ interface Props {
   orderDirectionValue: OrderDirectionTypes;
   columnFieldName: string;
   orderDirectionFieldName: string;
+  disabled?: boolean;
   onChange: (e: any) => void;
 }
 
@@ -20,6 +21,7 @@ const OrderBySortBy: React.SFC<Props> = ({
   orderDirectionValue,
   columnFieldName,
   orderDirectionFieldName,
+  disabled = false,
   onChange
 }) => (
   <Grid container spacing={3}>
@@ -29,6 +31,7 @@ const OrderBySortBy: React.SFC<Props> = ({
           name={columnFieldName}
           value={columnValue}
           sortColumns={sortColumns}
+          disabled={disabled}
           onChange={onChange}
         />
       </FormControl>
@@ -40,6 +43,7 @@ const OrderBySortBy: React.SFC<Props> = ({
           name={orderDirectionFieldName}
           enumType={OrderDirection}
           value={orderDirectionValue}
+          disabled={disabled}
           onChange={onChange}
         />
       </FormControl>

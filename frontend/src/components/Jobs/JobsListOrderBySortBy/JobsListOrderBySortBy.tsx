@@ -8,6 +8,7 @@ interface Props {
   orderDirectionValue: OrderDirectionTypes;
   columnFieldName: string;
   orderDirectionFieldName: string;
+  disabled?: boolean;
   onChange: (e: any) => void;
 }
 
@@ -22,6 +23,7 @@ const JobsListOrderBySortBy: React.SFC<Props> = ({
   orderDirectionValue,
   columnFieldName,
   orderDirectionFieldName,
+  disabled = false,
   onChange
 }) => (
   <OrderBySortBy
@@ -30,6 +32,7 @@ const JobsListOrderBySortBy: React.SFC<Props> = ({
     orderDirectionValue={orderDirectionValue}
     columnFieldName={columnFieldName}
     orderDirectionFieldName={orderDirectionFieldName}
+    disabled={disabled}
     onChange={onChange}
   />
 );
