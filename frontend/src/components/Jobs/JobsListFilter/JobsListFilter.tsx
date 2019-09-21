@@ -57,6 +57,7 @@ const JobsListFilter: React.SFC<Props> = ({
               name="positionTypes"
               enumType={JobPositionType}
               checkedItems={values.positionTypes}
+              disabled={disabled}
               onChange={onUpdateCheckGroup}
             />
           </Grid>
@@ -66,6 +67,7 @@ const JobsListFilter: React.SFC<Props> = ({
               name="salaryFrequency"
               enumType={SalaryFrequencyType}
               value={values.salaryFrequency}
+              disabled={disabled}
               onChange={onUpdateSalaryFrequency}
             />
           </Grid>
@@ -75,6 +77,7 @@ const JobsListFilter: React.SFC<Props> = ({
               name="salaryMin"
               value={values.salaryMin}
               items={salaryList}
+              disabled={disabled}
               onChange={onUpdateFilter}
             />
           </Grid>

@@ -1,18 +1,14 @@
 import * as React from "react";
-import {
-  FormControl,
-  RadioGroup,
-  FormControlLabel,
-  Divider
-} from "@material-ui/core";
-import Radio from "../Radio";
-import CheckboxRadioLabel from "../CheckboxRadioLabel";
+import { FormControl, RadioGroup, Divider } from "@material-ui/core";
 import * as numeral from "numeral";
+import RadioButton from "../RadioButton";
 
 interface Props {
   name: string;
   items: number[];
   value: number;
+  disabled?: boolean;
+  emptyLabel?: string;
   onChange: (e: any) => void;
 }
 
@@ -20,24 +16,28 @@ const CurrencyRadioGroup: React.SFC<Props> = ({
   name,
   items,
   value,
+  disabled = false,
+  emptyLabel = "Any",
   onChange
 }) => {
   return (
     <FormControl component="fieldset" fullWidth>
       <RadioGroup name={name} value={value || ""} onChange={onChange}>
+        <RadioButton
+          disabled={disabled}
+          value=""
+          checked={!value}
+          label={emptyLabel}
+        />
+        <Divider />
         {items.map((item, key) => {
-          const checked = value == item;
           return (
             <div key={key}>
-              <FormControlLabel
+              <RadioButton
+                disabled={disabled}
                 value={item}
-                control={<Radio name={name} value={item} checked={checked} />}
-                label={
-                  <CheckboxRadioLabel
-                    checked={checked}
-                    label={numeral(item).format("$0,0") + "+"}
-                  />
-                }
+                checked={value == item}
+                label={numeral(item).format("$0,0") + "+"}
               />
               {key != items.length - 1 ? <Divider /> : ""}
             </div>

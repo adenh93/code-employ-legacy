@@ -1,18 +1,13 @@
 import * as React from "react";
-import {
-  FormControl,
-  FormGroup,
-  Divider,
-  FormControlLabel
-} from "@material-ui/core";
-import Checkbox from "../Checkbox";
+import { FormControl, FormGroup, Divider } from "@material-ui/core";
+import CheckboxButton from "../CheckboxButton";
 import { GetEnumList, EnumLabelDictionary } from "../../../common/enums";
-import CheckboxRadioLabel from "../CheckboxRadioLabel";
 
 interface Props {
   enumType: any;
   name: string;
   checkedItems: number[];
+  disabled?: boolean;
   onChange: (name: string, values: number[]) => void;
 }
 
@@ -20,6 +15,7 @@ const EnumCheckboxList: React.SFC<Props> = ({
   enumType,
   name,
   checkedItems,
+  disabled = false,
   onChange
 }) => {
   const handleChange = (e: any) => {
@@ -42,21 +38,13 @@ const EnumCheckboxList: React.SFC<Props> = ({
           const checked = checkedItems.includes(item);
           return (
             <div key={key}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={checkedItems.includes(item)}
-                    onChange={handleChange}
-                    value={item}
-                    name={name}
-                  />
-                }
-                label={
-                  <CheckboxRadioLabel
-                    checked={checked}
-                    label={EnumLabelDictionary.get(enumType, item)}
-                  />
-                }
+              <CheckboxButton
+                name={name}
+                value={item}
+                checked={checked}
+                label={EnumLabelDictionary.get(enumType, item)}
+                disabled={disabled}
+                onChange={handleChange}
               />
               {key != items.length - 1 ? <Divider /> : ""}
             </div>
