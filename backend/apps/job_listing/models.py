@@ -45,6 +45,7 @@ class JobListing(models.Model):
     status = FSMIntegerField(default=JobListingState.DRAFT)
     date_to_publish = models.DateTimeField(null=True)
     date_to_expire = models.DateField(null=True)
+    published_date = models.DateField(null=True)
     closed_date = models.DateTimeField(null=True)
     created_date = models.DateTimeField(null=False, auto_now_add=True)
     modified_date = models.DateTimeField(null=True, auto_now=True)
@@ -73,7 +74,7 @@ class JobListing(models.Model):
         conditions=[can_publish]
     )
     def publish(self):
-        pass
+        self.published_date = datetime.now()
 
     @transition(
         field=status,
@@ -82,7 +83,7 @@ class JobListing(models.Model):
         conditions=[can_expire]
     )
     def expire(self):
-        pass
+        self.closed_date = datetime.now()
 
     @transition(
         field=status,
@@ -90,7 +91,7 @@ class JobListing(models.Model):
         target=JobListingState.CLOSED
     )
     def close(self):
-        pass
+        self.closed_date = datetime.now()
 
     @transition(
         field=status,

@@ -19,6 +19,7 @@ from apps.applicant.models import Applicant, ApplicantLanguage
 from apps.user.models import User
 from .providers.faker.job_title import Provider as job_title_provider
 from faker import Faker
+from datetime import datetime
 
 
 fake = Faker()
@@ -120,7 +121,8 @@ def _create_job_listing(company):
         country=company.country,
         state=company.state,
         post_code="3000",
-        status=JobListingState.PUBLISHED
+        status=JobListingState.PUBLISHED,
+        published_date=datetime.now()
     )
     job_listing.save()
     return job_listing
