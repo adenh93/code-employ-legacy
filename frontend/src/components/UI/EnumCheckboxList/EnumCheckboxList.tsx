@@ -19,12 +19,11 @@ const EnumCheckboxList: React.SFC<Props> = ({
   onChange
 }) => {
   const handleChange = (e: any) => {
-    const target = e.currentTarget;
+    const { value, checked } = e.currentTarget;
     let values = [...checkedItems] || [];
-
-    target.checked
-      ? values.push(parseInt(target.value))
-      : values.splice(values.indexOf(target.value), 1);
+    checked
+      ? values.push(parseInt(value))
+      : values.splice(values.indexOf(parseInt(value)), 1);
 
     onChange(name, values);
   };
