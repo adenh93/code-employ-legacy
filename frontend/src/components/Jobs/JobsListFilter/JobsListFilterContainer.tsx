@@ -5,7 +5,11 @@ import * as filterActions from "../../../store/jobListingFilter/actions";
 import { Dispatch } from "redux";
 import { connect } from "react-redux";
 import { ApplicationState } from "../../../store";
-import { JobPositionTypes, SalaryFrequencyTypes } from "../../../common/enums";
+import {
+  JobPositionTypes,
+  SalaryFrequencyTypes,
+  OrderDirectionTypes
+} from "../../../common/enums";
 import JobsListFilter from "./JobsListFilter";
 import { getSalaryList } from "../../../common/data/salaryList";
 
@@ -24,6 +28,8 @@ export interface FormValues {
   salaryFrequency: SalaryFrequencyTypes;
   salaryMin: number;
   salaryMax: number;
+  orderByColumn: string;
+  orderDirection: OrderDirectionTypes;
 }
 
 const formikEnhancer = withFormik<Props, FormValues>({
@@ -33,7 +39,9 @@ const formikEnhancer = withFormik<Props, FormValues>({
     positionTypes: filter.positionTypes,
     salaryFrequency: filter.salaryFrequency,
     salaryMin: filter.salaryMin,
-    salaryMax: filter.salaryMax
+    salaryMax: filter.salaryMax,
+    orderByColumn: filter.orderByColumn,
+    orderDirection: filter.orderDirection
   }),
 
   handleSubmit: (values: FormValues, { props }) => {

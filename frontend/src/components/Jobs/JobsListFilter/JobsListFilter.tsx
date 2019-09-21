@@ -10,6 +10,7 @@ import EnumCheckboxList from "../../UI/EnumCheckboxList";
 import EnumRadioGroup from "../../UI/EnumRadioGroup";
 import CurrencyRadioGroup from "../../UI/CurrencyRadioGroup";
 import FilterLegend from "../../UI/FilterLegend";
+import JobsListOrderBySortBy from "../JobsListOrderBySortBy";
 
 interface Props {
   values: FormValues;
@@ -38,16 +39,23 @@ const JobsListFilter: React.SFC<Props> = ({
     <form onSubmit={onSubmit}>
       <Paper p={3}>
         <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Typography variant="h5">Filter</Typography>
-          </Grid>
           <Grid item xs={12} sm={4} md={12}>
+            <FilterLegend label="Filter" />
             <TextInput
               name="keyword"
               label="Keyword"
               value={values.keyword}
               placeholder="Enter a keyword..."
               disabled={disabled}
+              onChange={onUpdateFilter}
+            />
+          </Grid>
+          <Grid item xs={12} sm={4} md={12}>
+            <JobsListOrderBySortBy
+              columnValue={values.orderByColumn}
+              orderDirectionValue={values.orderDirection}
+              columnFieldName="jobsListingOrderByColumn"
+              orderDirectionFieldName="jobsListingOrderDirection"
               onChange={onUpdateFilter}
             />
           </Grid>

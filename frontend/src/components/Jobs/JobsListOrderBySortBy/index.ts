@@ -1,3 +1,3 @@
 import JobsListOrderBySortBy from "./JobsListOrderBySortBy";
 
-export { JobsListOrderBySortBy };
+export default JobsListOrderBySortBy;

@@ -32,6 +32,9 @@ const TextInput: React.SFC<Props> = ({
       value={value || ""}
       placeholder={placeholder}
       disabled={disabled}
+      InputLabelProps={{
+        shrink: true
+      }}
       InputProps={
         adornment
           ? {

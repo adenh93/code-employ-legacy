@@ -1,16 +1,14 @@
 import * as React from "react";
-import { connect } from "react-redux";
-import { ApplicationState } from "../../../store";
-import { Dispatch } from "redux";
-import { JobListingSearchFilter, SortColumn } from "../../../common/types";
-import * as filterActions from "../../../store/jobListingFilter/actions";
+import { SortColumn } from "../../../common/types";
 import OrderBySortBy from "../../UI/OrderBySortBy";
 import { OrderDirectionTypes } from "../../../common/enums";
 
 interface Props {
-  filter: JobListingSearchFilter;
-  apiCallsInProgress: number;
-  updateFilter: (filter: JobListingSearchFilter) => void;
+  columnValue: string;
+  orderDirectionValue: OrderDirectionTypes;
+  columnFieldName: string;
+  orderDirectionFieldName: string;
+  onChange: (e: any) => void;
 }
 
 const sortColumns: SortColumn[] = [
@@ -20,56 +18,20 @@ const sortColumns: SortColumn[] = [
 ];
 
 const JobsListOrderBySortBy: React.SFC<Props> = ({
-  filter,
-  apiCallsInProgress,
-  updateFilter
-}) => {
-  const waiting = apiCallsInProgress > 0;
+  columnValue,
+  orderDirectionValue,
+  columnFieldName,
+  orderDirectionFieldName,
+  onChange
+}) => (
+  <OrderBySortBy
+    sortColumns={sortColumns}
+    columnValue={columnValue}
+    orderDirectionValue={orderDirectionValue}
+    columnFieldName={columnFieldName}
+    orderDirectionFieldName={orderDirectionFieldName}
+    onChange={onChange}
+  />
+);
 
-  const handleChangeOrderColumn = (e: any) => {
-    updateFilter({ ...filter, orderByColumn: e.target.value });
-  };
-
-  const handleChangeOrderDirection = (e: any) => {
-    updateFilter({
-      ...filter,
-      orderDirection: parseInt(e.target.value) as OrderDirectionTypes
-    });
-  };
-
-  return (
-    <>
-      {!waiting ? (
-        <OrderBySortBy
-          sortColumns={sortColumns}
-          columnValue={filter.orderByColumn}
-          orderDirectionValue={filter.orderDirection}
-          onChangeOrderColumn={handleChangeOrderColumn}
-          onChangeOrderDirection={handleChangeOrderDirection}
-        />
-      ) : (
-        ""
-      )}
-    </>
-  );
-};
-
-const mapStateToProps = (state: ApplicationState) => {
-  return {
-    filter: state.jobListingsFilter.jobListingsFilter,
-    apiCallsInProgress: state.apiStatus.apiCallsInProgress
-  };
-};
-
-const mapDispatchToProps = (dispatch: Dispatch) => {
-  const actions = {
-    updateFilter: (filter: JobListingSearchFilter) =>
-      dispatch(filterActions.updateJobListingsFilter(filter))
-  };
-  return actions;
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(JobsListOrderBySortBy);
+export default JobsListOrderBySortBy;

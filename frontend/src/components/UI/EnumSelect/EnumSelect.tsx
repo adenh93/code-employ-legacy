@@ -4,7 +4,7 @@ import { GetEnumList, EnumLabelDictionary } from "../../../common/enums";
 
 interface Props {
   name: string;
-  label: string;
+  label?: string;
   enumType: any;
   value: any;
   emptyText?: string;
@@ -22,9 +22,13 @@ const EnumSelect: React.SFC<Props> = ({
   onChange
 }) => (
   <>
-    <InputLabel shrink htmlFor={name}>
-      {label}
-    </InputLabel>
+    {label ? (
+      <InputLabel shrink htmlFor={name}>
+        {label}
+      </InputLabel>
+    ) : (
+      ""
+    )}
     <Select
       value={value || ""}
       onChange={onChange}

@@ -9,36 +9,38 @@ interface Props {
   sortColumns: SortColumn[];
   columnValue: string;
   orderDirectionValue: OrderDirectionTypes;
-  onChangeOrderColumn: (e: any) => void;
-  onChangeOrderDirection: (e: any) => void;
+  columnFieldName: string;
+  orderDirectionFieldName: string;
+  onChange: (e: any) => void;
 }
 
 const OrderBySortBy: React.SFC<Props> = ({
   sortColumns,
   columnValue,
   orderDirectionValue,
-  onChangeOrderColumn,
-  onChangeOrderDirection
+  columnFieldName,
+  orderDirectionFieldName,
+  onChange
 }) => (
   <Grid container spacing={3}>
     <Grid item xs={6}>
       <FormControl fullWidth>
         <SortColumnSelect
-          name="jobListingSortColumn"
+          name={columnFieldName}
           value={columnValue}
           sortColumns={sortColumns}
-          onChange={onChangeOrderColumn}
+          onChange={onChange}
         />
       </FormControl>
     </Grid>
     <Grid item xs={6}>
       <FormControl fullWidth>
         <EnumSelect
-          name="jobListingSortDirection"
           label="Order"
+          name={orderDirectionFieldName}
           enumType={OrderDirection}
           value={orderDirectionValue}
-          onChange={onChangeOrderDirection}
+          onChange={onChange}
         />
       </FormControl>
     </Grid>
