@@ -13,7 +13,7 @@ import * as styles from "./styles.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMapMarkerAlt,
-  faMoneyBillAlt,
+  faMoneyBillWave,
   faClock
 } from "@fortawesome/free-solid-svg-icons";
 import * as moment from "moment";
@@ -24,7 +24,7 @@ interface Props {
 
 const JobsListItem: React.SFC<Props> = ({ jobListing }) => {
   return (
-    <Paper className={styles.paper} p={2}>
+    <Paper className={styles.paper} p={3}>
       <Grid container style={{ marginBottom: 15 }}>
         <Grid item xs={10}>
           <Link variant="h6">{jobListing.jobTitle}</Link>
@@ -52,7 +52,7 @@ const JobsListItem: React.SFC<Props> = ({ jobListing }) => {
             <Typography variant="body1">
               <FontAwesomeIcon
                 className={styles.cashIcon}
-                icon={faMoneyBillAlt}
+                icon={faMoneyBillWave}
               />{" "}
               {numeral(jobListing.salary).format("$0,0")}{" "}
               {EnumLabelDictionary.get(

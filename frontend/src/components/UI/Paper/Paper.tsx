@@ -2,13 +2,16 @@ import * as React from "react";
 import { Paper as MuiPaper, Box } from "@material-ui/core";
 
 interface Props {
-  p: number;
+  p?: number;
+  marginBottom?: number;
   className?: any;
 }
 
-const Paper: React.SFC<Props> = ({ p, className, ...props }) => (
+const Paper: React.SFC<Props> = ({ p, marginBottom, className, ...props }) => (
   <MuiPaper className={className}>
-    <Box p={p}>{props.children}</Box>
+    <Box p={p} marginBottom={marginBottom}>
+      {props.children}
+    </Box>
   </MuiPaper>
 );
 

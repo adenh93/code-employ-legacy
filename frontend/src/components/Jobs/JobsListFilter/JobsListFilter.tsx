@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Typography, Button, Grid, Divider } from "@material-ui/core";
+import { Typography, Button, Grid } from "@material-ui/core";
 import TextInput from "../../UI/TextInput";
 import Paper from "../../UI/Paper";
 import { JobPositionType, SalaryFrequencyType } from "../../../common/enums";
@@ -9,7 +9,6 @@ import { ProgrammingLanguage } from "../../../common/types";
 import EnumCheckboxList from "../../UI/EnumCheckboxList";
 import EnumRadioGroup from "../../UI/EnumRadioGroup";
 import CurrencyRadioGroup from "../../UI/CurrencyRadioGroup";
-import * as styles from "./styles.module.scss";
 import FilterLegend from "../../UI/FilterLegend";
 
 interface Props {
