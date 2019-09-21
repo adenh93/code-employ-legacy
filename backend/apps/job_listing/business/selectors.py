@@ -45,7 +45,7 @@ class JobListingSelector():
 
     @staticmethod
     def get_paged_job_listings(filter: JobListingSearchFilterSerializer) -> PagedResult:
-        query = Q()
+        query = Q(status=JobListingState.PUBLISHED)
         if filter.data['keyword']:
             query &= (
                 Q(job_title__icontains=filter.data['keyword']) |

@@ -5,7 +5,7 @@ from rest_framework.test import APITransactionTestCase, APIClient
 from rest_framework.views import status
 from ..models import JobListing, JobListingLanguage, JobListingList
 from ..api.serializers import JobListingSearchResponseSerializer
-from ..enums import JobPositionType, SalaryFrequency
+from ..enums import JobPositionType, SalaryFrequency, JobListingState
 from apps.company.models import Company
 from apps.core.managers import PagedResult
 from apps.common.enums import OrderDirectionEnum
@@ -23,7 +23,7 @@ class JobListingListViewTest(APITransactionTestCase):
     @staticmethod
     def create_job_listing(company_id, job_title, description, country_id,
                            state_id, position_type, contract_length, salary,
-                           salary_frequency, language_id):
+                           salary_frequency, language_id, status):
         job_listing = JobListing.objects.create(
             company_id=company_id,
             job_title=job_title,
@@ -36,6 +36,7 @@ class JobListingListViewTest(APITransactionTestCase):
             contract_length=contract_length,
             salary=salary,
             salary_frequency=salary_frequency,
+            status=status
         )
 
         JobListingLanguage.objects.create(
@@ -65,7 +66,8 @@ class JobListingListViewTest(APITransactionTestCase):
             12,
             850,
             SalaryFrequency.PERDAY,
-            python.id
+            python.id,
+            JobListingState.PUBLISHED
         )
 
         self.create_job_listing(
@@ -78,7 +80,8 @@ class JobListingListViewTest(APITransactionTestCase):
             None,
             110000,
             SalaryFrequency.PERYEAR,
-            python.id
+            python.id,
+            JobListingState.PUBLISHED
         )
 
         self.create_job_listing(
@@ -91,11 +94,48 @@ class JobListingListViewTest(APITransactionTestCase):
             None,
             40,
             SalaryFrequency.PERHOUR,
-            golang.id
+            golang.id,
+            JobListingState.PUBLISHED
+        )
+
+        self.create_job_listing(
+            company.id,
+            'Graduate Python developer',
+            'Some description',
+            country.id,
+            state.id,
+            JobPositionType.PARTTIME,
+            None,
+            30,
+            SalaryFrequency.PERHOUR,
+            python.id,
+            JobListingState.PREPUBLISH
         )
 
 
 class GetJobListingListTests(JobListingListViewTest):
+
+    def test_only_published_jobs_listings_are_returned(self):
+        """
+        This test asserts that only Job Listings with the PUBLISHED state
+        will be included in the search results from the job-listings/paged
+        endpoint before filtering is applied.
+        """
+
+        request_body = {
+            'current_page': 1,
+            'items_per_page': 20,
+            'order_direction': OrderDirectionEnum.ASC.value
+        }
+
+        response = self.client.post(
+            reverse('job-listings-paged'),
+            data=request_body
+        )
+
+        statuses = [item['status'] for item in response.data['items']]
+
+        self.assertNotIn(JobListingState.PREPUBLISH, statuses)
 
     def test_paged_job_listings_no_filter(self):
         """
@@ -115,8 +155,10 @@ class GetJobListingListTests(JobListingListViewTest):
             data=request_body
         )
 
-        expected_items = JobListingList.objects.all()[0:20]
-        expected_count = JobListingList.objects.all().count()
+        expected_items = JobListingList.objects.filter(
+            status=JobListingState.PUBLISHED)[0:20]
+        expected_count = JobListingList.objects.filter(
+            status=JobListingState.PUBLISHED).count()
 
         expected_result = PagedResult(
             items=expected_items,
@@ -161,6 +203,7 @@ class GetJobListingListTests(JobListingListViewTest):
         )
 
         expected_filter = (
+            Q(status=JobListingState.PUBLISHED) &
             (Q(job_title__contains=keyword_filter) |
              Q(description__contains=keyword_filter)) &
             Q(languages__contained_by=language_filter) &
@@ -205,8 +248,10 @@ class GetJobListingListTests(JobListingListViewTest):
             data=request_body
         )
 
-        expected_items = JobListingList.objects.all().order_by('-salary')[0:20]
-        expected_count = JobListingList.objects.all().count()
+        expected_items = JobListingList.objects.filter(
+            status=JobListingState.PUBLISHED).order_by('-salary')[0:20]
+        expected_count = JobListingList.objects.filter(
+            status=JobListingState.PUBLISHED).count()
 
         expected_result = PagedResult(
             items=expected_items,
