@@ -45,7 +45,7 @@ class JobListing(models.Model):
     status = FSMIntegerField(default=JobListingState.DRAFT)
     date_to_publish = models.DateTimeField(null=True)
     date_to_expire = models.DateField(null=True)
-    published_date = models.DateField(null=True)
+    published_date = models.DateTimeField(null=True)
     closed_date = models.DateTimeField(null=True)
     created_date = models.DateTimeField(null=False, auto_now_add=True)
     modified_date = models.DateTimeField(null=True, auto_now=True)
@@ -123,7 +123,11 @@ class JobListingList(models.Model):
     country_name = models.TextField()
     post_code = models.TextField()
     tags = ArrayField(models.TextField())
+    status = models.IntegerField()
     created_date = models.DateTimeField()
+    modified_date = models.DateTimeField()
+    published_date = models.DateTimeField()
+    closed_date = models.DateTimeField()
     objects = ModelManager()
 
     class Meta:
