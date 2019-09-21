@@ -14,7 +14,7 @@ interface Props {
 const sortColumns: SortColumn[] = [
   { label: "Job Title", value: "job_title" },
   { label: "Salary", value: "salary" },
-  { label: "Created Date", value: "created_date" }
+  { label: "Published Date", value: "published_date" }
 ];
 
 const JobsListOrderBySortBy: React.SFC<Props> = ({

@@ -32,7 +32,7 @@ const JobsListItem: React.SFC<Props> = ({ jobListing }) => {
         <Grid item xs={2}>
           <Typography style={{ textAlign: "right" }} variant="body2">
             <FontAwesomeIcon className={styles.clockIcon} icon={faClock} />
-            {moment(jobListing.createdDate).fromNow()}
+            {moment(jobListing.publishedDate).fromNow()}
           </Typography>
         </Grid>
         <Grid item xs={12}>

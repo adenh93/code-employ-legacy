@@ -54,8 +54,8 @@ const JobsListFilter: React.SFC<Props> = ({
             <JobsListOrderBySortBy
               columnValue={values.orderByColumn}
               orderDirectionValue={values.orderDirection}
-              columnFieldName="jobsListingOrderByColumn"
-              orderDirectionFieldName="jobsListingOrderDirection"
+              columnFieldName="orderByColumn"
+              orderDirectionFieldName="orderDirection"
               onChange={onUpdateFilter}
             />
           </Grid>

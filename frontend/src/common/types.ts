@@ -76,6 +76,8 @@ export interface JobListingList {
   postCode: string;
   tags: string[];
   createdDate: Date;
+  modifiedDate: Date;
+  publishedDate: Date;
 }
 
 export interface PaginationFilter {

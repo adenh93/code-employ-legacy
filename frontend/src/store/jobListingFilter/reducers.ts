@@ -11,7 +11,7 @@ export const initialState: JobListingsFilterState = {
   jobListingsFilter: {
     currentPage: 1,
     itemsPerPage: 5,
-    orderByColumn: "created_date",
+    orderByColumn: "published_date",
     orderDirection: OrderDirection.DESC,
     keyword: "",
     positionTypes: [],
