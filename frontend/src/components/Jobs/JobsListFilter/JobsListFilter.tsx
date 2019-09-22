@@ -1,7 +1,13 @@
 import * as React from "react";
-import { Typography, Button, Grid } from "@material-ui/core";
+import {
+  Paper,
+  Button,
+  Grid,
+  makeStyles,
+  createStyles,
+  Theme
+} from "@material-ui/core";
 import TextInput from "../../UI/TextInput";
-import Paper from "../../UI/Paper";
 import { JobPositionType, SalaryFrequencyType } from "../../../common/enums";
 import { FormValues } from "./JobsListFilterContainer";
 import MultiSelect from "../../UI/MultiSelect";
@@ -24,6 +30,14 @@ interface Props {
   onSubmit: any;
 }
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      padding: theme.spacing(3)
+    }
+  })
+);
+
 const JobsListFilter: React.SFC<Props> = ({
   values,
   salaryList,
@@ -35,9 +49,10 @@ const JobsListFilter: React.SFC<Props> = ({
   onClearFilter,
   onSubmit
 }) => {
+  const styles = useStyles({});
   return (
     <form onSubmit={onSubmit}>
-      <Paper p={3}>
+      <Paper className={styles.root}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={4} md={12}>
             <FilterLegend label="Filter" />

@@ -4,15 +4,18 @@ import {
   SnackbarContent,
   IconButton,
   Typography,
-  Grid
+  Grid,
+  makeStyles,
+  Theme,
+  createStyles
 } from "@material-ui/core";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import ErrorIcon from "@material-ui/icons/Error";
 import WarningIcon from "@material-ui/icons/Warning";
 import InfoIcon from "@material-ui/icons/Info";
 import CloseIcon from "@material-ui/icons/Close";
-import * as styles from "./styles.module.scss";
 import { NotificationTypes } from "../../common/enums";
+import { red, green, amber, blue } from "@material-ui/core/colors";
 
 const variantIcon: any = {
   success: CheckCircleIcon,
@@ -29,6 +32,30 @@ interface Props {
   onExited?: () => void;
 }
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      marginTop: 70
+    },
+    success: {
+      backgroundColor: green[500]
+    },
+    warning: {
+      backgroundColor: amber[700]
+    },
+    info: {
+      backgroundColor: blue[500]
+    },
+    error: {
+      backgroundColor: red[600]
+    },
+    icon: {
+      fontSize: 20,
+      marginRight: 10
+    }
+  })
+);
+
 const Notification: React.SFC<Props> = ({
   open,
   variant = "success",
@@ -36,11 +63,12 @@ const Notification: React.SFC<Props> = ({
   onClose,
   onExited
 }) => {
+  const styles = useStyles({});
   const Icon = variantIcon[variant];
   return (
     <Snackbar
       open={open}
-      className={styles.notification}
+      className={styles.root}
       autoHideDuration={5000}
       onClose={onClose}
       onExited={onExited}

@@ -1,7 +1,14 @@
 import * as React from "react";
-import { Typography, Grid, Link } from "@material-ui/core";
+import {
+  Typography,
+  Paper,
+  Grid,
+  Link,
+  makeStyles,
+  Theme,
+  createStyles
+} from "@material-ui/core";
 import { JobListingList } from "../../../common/types";
-import Paper from "../../UI/Paper";
 import * as numeral from "numeral";
 import {
   EnumLabelDictionary,
@@ -9,7 +16,6 @@ import {
   JobPositionType
 } from "../../../common/enums";
 import ChipList from "../../UI/ChipList";
-import * as styles from "./styles.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMapMarkerAlt,
@@ -17,21 +23,51 @@ import {
   faClock
 } from "@fortawesome/free-solid-svg-icons";
 import * as moment from "moment";
+import { green, grey } from "@material-ui/core/colors";
+const classNames = require("classnames");
 
 interface Props {
   jobListing: JobListingList;
 }
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      padding: theme.spacing(3),
+      borderLeft: `3px solid ${theme.palette.primary.main}`
+    },
+    grid: {
+      marginBottom: 15
+    },
+    icon: {
+      marginRight: 5
+    },
+    clockIcon: {
+      color: grey[500]
+    },
+    cashIcon: {
+      color: green[500]
+    },
+    locationIcon: {
+      color: theme.palette.primary.main
+    }
+  })
+);
+
 const JobsListItem: React.SFC<Props> = ({ jobListing }) => {
+  const styles = useStyles({});
   return (
-    <Paper className={styles.paper} p={3}>
-      <Grid container style={{ marginBottom: 15 }}>
+    <Paper className={styles.root}>
+      <Grid container className={styles.grid}>
         <Grid item xs={10}>
           <Link variant="h6">{jobListing.jobTitle}</Link>
         </Grid>
         <Grid item xs={2}>
           <Typography style={{ textAlign: "right" }} variant="body2">
-            <FontAwesomeIcon className={styles.clockIcon} icon={faClock} />
+            <FontAwesomeIcon
+              className={classNames(styles.icon, styles.clockIcon)}
+              icon={faClock}
+            />
             {moment(jobListing.publishedDate).fromNow()}
           </Typography>
         </Grid>
@@ -41,7 +77,7 @@ const JobsListItem: React.SFC<Props> = ({ jobListing }) => {
           </Typography>
         </Grid>
       </Grid>
-      <Grid container style={{ marginBottom: 15 }}>
+      <Grid container className={styles.grid}>
         <Grid item xs={12}>
           <Typography variant="body1">
             {EnumLabelDictionary.get(JobPositionType, jobListing.positionType)}
@@ -51,7 +87,7 @@ const JobsListItem: React.SFC<Props> = ({ jobListing }) => {
           <Grid item xs={12}>
             <Typography variant="body1">
               <FontAwesomeIcon
-                className={styles.cashIcon}
+                className={classNames(styles.icon, styles.cashIcon)}
                 icon={faMoneyBillWave}
               />{" "}
               {numeral(jobListing.salary).format("$0,0")}{" "}
@@ -65,11 +101,11 @@ const JobsListItem: React.SFC<Props> = ({ jobListing }) => {
           ""
         )}
       </Grid>
-      <Grid container style={{ marginBottom: 20 }}>
+      <Grid container className={styles.grid}>
         <Grid item xs={12}>
           <Typography variant="body1" color="textPrimary">
             <FontAwesomeIcon
-              className={styles.locationIcon}
+              className={classNames(styles.icon, styles.locationIcon)}
               icon={faMapMarkerAlt}
             />{" "}
             {jobListing.city}, {jobListing.stateName}
