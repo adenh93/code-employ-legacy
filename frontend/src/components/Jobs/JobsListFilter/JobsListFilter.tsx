@@ -5,7 +5,8 @@ import {
   Grid,
   makeStyles,
   createStyles,
-  Theme
+  Theme,
+  Typography
 } from "@material-ui/core";
 import TextInput from "../../UI/TextInput";
 import { JobPositionType, SalaryFrequencyType } from "../../../common/enums";
@@ -54,16 +55,8 @@ const JobsListFilter: React.SFC<Props> = ({
     <form onSubmit={onSubmit}>
       <Paper className={styles.root}>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={4} md={12}>
-            <FilterLegend label="Filter" />
-            <TextInput
-              name="keyword"
-              label="Keyword"
-              value={values.keyword}
-              placeholder="Enter a keyword..."
-              disabled={disabled}
-              onChange={onUpdateFilter}
-            />
+          <Grid item xs={12}>
+            <Typography variant="h6">Filter</Typography>
           </Grid>
           <Grid item xs={12} sm={4} md={12}>
             <JobsListOrderBySortBy
@@ -71,6 +64,17 @@ const JobsListFilter: React.SFC<Props> = ({
               orderDirectionValue={values.orderDirection}
               columnFieldName="orderByColumn"
               orderDirectionFieldName="orderDirection"
+              disabled={disabled}
+              onChange={onUpdateFilter}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <FilterLegend label="Languages" />
+            <MultiSelect
+              name="languages"
+              value={values.languages}
+              items={programmingLanguages}
+              emptyText="Any"
               disabled={disabled}
               onChange={onUpdateFilter}
             />
@@ -101,17 +105,6 @@ const JobsListFilter: React.SFC<Props> = ({
               name="salaryMin"
               value={values.salaryMin}
               items={salaryList}
-              disabled={disabled}
-              onChange={onUpdateFilter}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <FilterLegend label="Languages" />
-            <MultiSelect
-              name="languages"
-              value={values.languages}
-              items={programmingLanguages}
-              emptyText="Any"
               disabled={disabled}
               onChange={onUpdateFilter}
             />

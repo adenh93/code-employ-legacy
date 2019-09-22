@@ -22,7 +22,6 @@ interface Props {
 }
 
 export interface FormValues {
-  keyword: string;
   languages: string[];
   positionTypes: JobPositionTypes[];
   salaryFrequency: SalaryFrequencyTypes;
@@ -34,7 +33,6 @@ export interface FormValues {
 
 const formikEnhancer = withFormik<Props, FormValues>({
   mapPropsToValues: ({ filter }) => ({
-    keyword: filter.keyword,
     languages: filter.languages,
     positionTypes: filter.positionTypes,
     salaryFrequency: filter.salaryFrequency,
