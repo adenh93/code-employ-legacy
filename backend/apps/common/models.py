@@ -18,7 +18,6 @@ class LocationStateCode(models.Model):
     )
     code = models.TextField(null=False, max_length=10)
     name = models.TextField(null=False, max_length=255)
-    type = models.TextField(null=False, max_length=255)
 
 
 class LocationCityCode(models.Model):
