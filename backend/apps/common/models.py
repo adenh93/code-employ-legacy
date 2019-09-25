@@ -21,6 +21,14 @@ class LocationStateCode(models.Model):
     type = models.TextField(null=False, max_length=255)
 
 
+class LocationCityCode(models.Model):
+    state = models.ForeignKey(
+        LocationStateCode,
+        on_delete=models.CASCADE
+    )
+    name = models.TextField(null=False, max_length=255)
+
+
 class ProgrammingLanguage(models.Model):
     name = models.TextField(null=False, max_length=100)
 
